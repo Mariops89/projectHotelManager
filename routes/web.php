@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\HabitacionesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/clientes', [ClientesController::class, 'listar'])->name('clientes');
+Route::post('/clientes', [ClientesController::class, 'listarAJAX']);
+
+
+Route::get('/habitaciones', [HabitacionesController::class, 'listar'])->name('habitaciones');
