@@ -24,4 +24,22 @@ class ClientesController extends Controller
     {
        return Cliente::all();
     }
+
+
+    public function guardar(Request $request)
+    {
+        if (is_null($request->id)) {
+            //crear
+            Cliente::create($request->datos);
+        } else {
+            //editar
+            Cliente::where('id', $request->id)->update($request->datos);
+        }
+    }
+
+
+    public function eliminar(Request $request)
+    {
+        Cliente::destroy($request->id);
+    }
 }

@@ -4,7 +4,7 @@
             <div class="card-body">
                 <div class="row mb-3">
                     <div class="col text-end">
-                        <button type="button" class="btn btn-success">
+                        <button type="button" class="btn btn-success" id="nuevo-cliente">
                             <i class="fa fa-plus"></i> Nuevo Cliente
                         </button>
                     </div>
@@ -30,7 +30,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="form-clientes">
                     <div class="row">
                         <div class="col-2">
                             <div class="mb-3">
@@ -97,7 +97,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="fa fa-times"></i> Cerrar
                 </button>
-                <button type="button" class="btn btn-success">
+                <button type="button" class="btn btn-success aceptar">
                     <i class="fa fa-check"></i> Aceptar
                 </button>
             </div>

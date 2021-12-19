@@ -78,6 +78,7 @@
         <!-- ============================================================== -->
         <div class="container-fluid">
             @include($vista)
+            @include('plantilla/modal-eliminar')
         </div>
         <!-- ============================================================== -->
         <!-- End Container fluid  -->
@@ -121,6 +122,7 @@
     });
 </script>
 
+<script src="{{url('plantilla/js/funciones.js')}}"></script>
 <!--This page JavaScript -->
 @foreach($ficheros_js as $fichero)
     <script src="{{url($fichero)}}"></script>

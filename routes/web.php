@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Route::get('/clientes', [ClientesController::class, 'listar'])->name('clientes');
 Route::post('/clientes', [ClientesController::class, 'listarAJAX']);
+Route::post('/clientes/guardar', [ClientesController::class, 'guardar']);
+Route::post('/clientes/eliminar', [ClientesController::class, 'eliminar']);
 
 
 Route::get('/habitaciones', [HabitacionesController::class, 'listar'])->name('habitaciones');
