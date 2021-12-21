@@ -43,4 +43,12 @@ class PlantillaService
         $this->setJs('plugins/DataTables/datatables.min.js');
     }
 
+
+    public function loadSelect2()
+    {
+        $this->setCss('plugins/select2/dist/css/select2.min.css');
+        $this->setJs('plugins/select2/dist/js/select2.full.min.js');
+        $this->setJs('plugins/select2/dist/js/i18n/es.js');
+    }
+
 }

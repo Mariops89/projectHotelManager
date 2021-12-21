@@ -14,9 +14,9 @@ class ClientesController extends Controller
         $plantilla->setTitle('Clientes');
         $plantilla->setBreadcrumb(array('clientes'));
         $plantilla->loadDatatables();
-        $plantilla->setJs('paginas/clientes/js/clientes.js');
+        $plantilla->setJs('paginas/clientes/js/clientes.js'); //esto es el js, no la vista
 
-        return $plantilla->load('clientes/clientes');
+        return $plantilla->load('clientes/clientes'); //la vista
     }
 
 
