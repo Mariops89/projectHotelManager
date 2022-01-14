@@ -10,6 +10,11 @@ class PlantillaService
     private $data;
     private $vista;
     private $breadcrumb = array();
+    private $header = true;
+    private $sidebar = true;
+    private $footer = true;
+    private $page_breadcrumb = true;
+    private $page_class = 'page-wrapper';
 
 
     function setTitle($title): void {
@@ -26,6 +31,27 @@ class PlantillaService
 
     function setBreadcrumb($breadcrumb) {
         $this->breadcrumb = $breadcrumb;
+    }
+
+    function setHeader($header) {
+        $this->header = $header;
+    }
+
+    function setSidebar($sidebar) {
+        $this->sidebar = $sidebar;
+        if (!$sidebar) {
+            $this->page_class = 'auth-wrapper';
+        }
+    }
+
+    public function setFooter($footer)
+    {
+        $this->footer = $footer;
+    }
+
+    public function setPageBreadcrumb($page_breadcrumb)
+    {
+        $this->page_breadcrumb = $page_breadcrumb;
     }
 
 

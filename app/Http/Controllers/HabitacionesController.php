@@ -19,7 +19,7 @@ class HabitacionesController extends Controller
         $plantilla->loadDatatables();
         $plantilla->loadSelect2();
         $plantilla->setJs('paginas/habitaciones/js/habitaciones.js');
-        return $plantilla->load('habitaciones.habitaciones', ['tipos' => $tipos]);
+        return $plantilla->load('habitaciones/habitaciones', ['tipos' => $tipos]);
     }
 
 

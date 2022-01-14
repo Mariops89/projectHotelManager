@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\HabitacionesController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\personalController;
+use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\TipoHabitacionesController;
+use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +38,21 @@ Route::get('/habitaciones', [HabitacionesController::class, 'listar'])->name('ha
 Route::post('/habitaciones', [HabitacionesController::class, 'listarAJAX']);
 Route::post('/habitaciones/guardar', [HabitacionesController::class, 'guardar']);
 Route::post('/habitaciones/eliminar', [HabitacionesController::class, 'eliminar']);
+
+Route::get('/servicios', [ServiciosController::class, 'listar'])->name('servicios');
+Route::post('/servicios', [ServiciosController::class, 'listarAJAX']);
+Route::post('/servicios/guardar', [ServiciosController::class, 'guardar']);
+Route::post('/servicios/eliminar', [ServiciosController::class, 'eliminar']);
+
+Route::get('/usuarios', [UsuariosController::class, 'listar'])->name('usuarios');
+Route::post('/usuarios', [UsuariosController::class, 'listarAJAX']);
+Route::post('/usuarios/guardar', [UsuariosController::class, 'guardar']);
+Route::post('/usuarios/eliminar', [UsuariosController::class, 'eliminar']);
+
+Route::get('/personal', [PersonalController::class, 'listar'])->name('personal');
+Route::post('/personal', [PersonalController::class, 'listarAJAX']);
+Route::post('/personal/guardar', [PersonalController::class, 'guardar']);
+Route::post('/personal/eliminar', [PersonalController::class, 'eliminar']);
+
+Route::get('/login', [LoginController::class, 'listar'])->name('login');
+
