@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GuardarTipoHabitacionRequest;
 use App\Models\TipoHabitacion;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
@@ -24,14 +25,14 @@ class TipoHabitacionesController extends Controller
         return TipoHabitacion::all();
     }
 
-    public function guardar(Request $request)
+    public function guardar(GuardarTipoHabitacionRequest $request)
     {
         if (is_null($request->id)) {
             //crear
-            TipoHabitacion::create($request->datos);
+            TipoHabitacion::create($request->validated());
         } else {
             //editar
-            TipoHabitacion::where('id', $request->id)->update($request->datos);
+            TipoHabitacion::where('id', $request->id)->update($request->validated());
         }
     }
 

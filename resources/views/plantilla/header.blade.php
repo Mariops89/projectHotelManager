@@ -58,12 +58,12 @@
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
                     <a class=" nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        admin
+                        {{Auth::user()->usuario}}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0)">
-                            <i class="fa fa-power-off me-1 ms-1"></i> Logout
+                        <a class="dropdown-item" href="{{url('logout')}}">
+                            <i class="fa fa-power-off me-1 ms-1"></i> Cerrar sesión
                         </a>
                     </ul>
                 </li>

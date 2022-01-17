@@ -88,22 +88,24 @@ $(function () {
     //
     // })
 
-    modal_personal.on('click', '.aceptar', function () {
+    modal_personal.on('hidden.bs.modal', function () {
+        limpiarErrores(modal_personal);
+    }).on('click', '.aceptar', function () {
+        limpiarErrores(modal_personal);
         //cogemos los datos del formulario en JSON
         let datos_form = serializeArrayJson('#form-personal');
+        datos_form.id = id_activo;
 
         //enviar los datos al servidor mediante POST (usando AJAX)
-        let datos_envio = {
-            id: id_activo,
-            datos: datos_form
-        };
-        $.post(BASE_URL + 'personal/guardar', datos_envio, function () {
+        $.post(BASE_URL + 'personal/guardar', datos_form, function () {
             //se ejecuta cuando recibe respuesta válida
 
             //recargar el datatables
             table.ajax.reload();
             //ocultar el modal
             modal_personal_bs.hide();
+        }).fail(function(error) {
+            mostrarErrores(error, modal_personal);
         })
     });
 

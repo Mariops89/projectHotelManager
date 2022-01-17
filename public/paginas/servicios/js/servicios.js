@@ -84,22 +84,24 @@ $(function () {
     //
     // })
 
-    modal_servicios.on('click', '.aceptar', function () {
+    modal_servicios.on('hidden.bs.modal', function () {
+        limpiarErrores(modal_servicios);
+    }).on('click', '.aceptar', function () {
+        limpiarErrores(modal_servicios);
         //cogemos los datos del formulario en JSON
         let datos_form = serializeArrayJson('#form-servicios');
+        datos_form.id = id_activo
 
         //enviar los datos al servidor mediante POST (usando AJAX)
-        let datos_envio = {
-            id: id_activo,
-            datos: datos_form
-        };
-        $.post(BASE_URL + 'servicios/guardar', datos_envio, function () {
+        $.post(BASE_URL + 'servicios/guardar', datos_form, function () {
             //se ejecuta cuando recibe respuesta válida
 
             //recargar el datatables
             table.ajax.reload();
             //ocultar el modal
             modal_servicios_bs.hide();
+        }).fail(function(error) {
+            mostrarErrores(error, modal_servicios);
         })
     });
 

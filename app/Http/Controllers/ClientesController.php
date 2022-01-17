@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GuardarClienteRequest;
 use App\Models\Cliente;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
@@ -26,14 +27,14 @@ class ClientesController extends Controller
     }
 
 
-    public function guardar(Request $request)
+    public function guardar(GuardarClienteRequest $request)
     {
         if (is_null($request->id)) {
             //crear
-            Cliente::create($request->datos);
+            Cliente::create($request->validated());
         } else {
             //editar
-            Cliente::where('id', $request->id)->update($request->datos);
+            Cliente::where('id', $request->id)->update($request->validated());
         }
     }
 

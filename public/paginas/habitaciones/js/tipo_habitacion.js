@@ -73,16 +73,14 @@ $(function () {
     // modal_clientes.find('.aceptar').on('click', function () {
     //
     // })
-
-    modal_tipo_habitacion.on('click', '.aceptar', function () {
+    modal_tipo_habitacion.on('hidden.bs.modal', function () {
+        limpiarErrores(modal_tipo_habitacion);
+    }).on('click', '.aceptar', function () {
         //cogemos los datos del formulario en JSON
-        let datos_form = serializeArrayJson('#form-tipo_habitacion');
+        let datos_envio = serializeArrayJson('#form-tipo_habitacion');
+        datos_envio.id = id_activo
 
         //enviar los datos al servidor mediante POST (usando AJAX)
-        let datos_envio = {
-            id: id_activo,
-            datos: datos_form
-        };
         $.post(BASE_URL + 'tipo_habitaciones/guardar', datos_envio, function () {
             //se ejecuta cuando recibe respuesta válida
 
@@ -90,6 +88,8 @@ $(function () {
             table.ajax.reload();
             //ocultar el modal
             modal_tipo_habitacion_bs.hide();
+        }).fail(function(error) {
+            mostrarErrores(error, modal_tipo_habitacion);
         })
     });
 

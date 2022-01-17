@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Servicios;
+use App\Http\Requests\GuardarServicioRequest;
+use App\Models\Servicio;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
 
@@ -11,9 +12,9 @@ class ServiciosController extends Controller
 
     public function listar(PlantillaService $plantilla)
     {
-        $tipos = Servicios::all();
+        $tipos = Servicio::all();
 
-        $plantilla->setTitle('Servicios');
+        $plantilla->setTitle('Servicio');
         $plantilla->setBreadcrumb(array('servicios'));
         $plantilla->loadDatatables();
         $plantilla->loadSelect2();
@@ -24,24 +25,24 @@ class ServiciosController extends Controller
 
     public function listarAJAX()
     {
-        return Servicios::all();
+        return Servicio::all();
     }
 
-    public function guardar(Request $request)
+    public function guardar(GuardarServicioRequest $request)
     {
         if (is_null($request->id)) {
             //crear
-            Servicios::create($request->datos);
+            Servicio::create($request->validated());
         } else {
             //editar
-            Servicios::where('id', $request->id)->update($request->datos);
+            Servicio::where('id', $request->id)->update($request->validated());
         }
     }
 
 
     public function eliminar(Request $request)
     {
-        Servicios::destroy($request->id);
+        Servicio::destroy($request->id);
     }
 }
 

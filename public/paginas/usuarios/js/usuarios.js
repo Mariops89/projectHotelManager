@@ -29,7 +29,7 @@ $(function () {
         },
         columns: [
             {data: 'usuario', title: 'Usuario'},
-            {data: 'password', title: 'Contraseña'},
+            {data: '', title: 'Contraseña', defaultContent: '******'},
             {data: 'personal.nombre', title: 'Persona', defaultContent: 'No asignado'
                 /*render: function (data, type, row, meta) {
                     if (data === 1) {
@@ -65,7 +65,7 @@ $(function () {
         id_activo = datos.id;
         modal_usuarios.find('.modal-title').html('Editar cliente');
         $('#usuarios-usuario').val(datos.usuario);
-        $('#usuarios-password').val(datos.password);
+        $('#usuarios-password').val('');
         $('#usuarios-id_personal').val(datos.id_personal).trigger('change');
         modal_usuarios_bs.show();
 
@@ -83,22 +83,22 @@ $(function () {
     //
     // })
 
-    modal_usuarios.on('click', '.aceptar', function () {
+    modal_usuarios.on('hidden.bs.modal', function () {
+        limpiarErrores(modal_usuarios);
+    }).on('click', '.aceptar', function () {
         //cogemos los datos del formulario en JSON
         let datos_form = serializeArrayJson('#form-usuarios');
-
+        datos_form.id = id_activo
         //enviar los datos al servidor mediante POST (usando AJAX)
-        let datos_envio = {
-            id: id_activo,
-            datos: datos_form
-        };
-        $.post(BASE_URL + 'usuarios/guardar', datos_envio, function () {
+        $.post(BASE_URL + 'usuarios/guardar', datos_form, function () {
             //se ejecuta cuando recibe respuesta válida
 
             //recargar el datatables
             table.ajax.reload();
             //ocultar el modal
             modal_usuarios_bs.hide();
+        }).fail(function(error) {
+            mostrarErrores(error, modal_usuarios);
         })
     });
 

@@ -7,40 +7,32 @@
                     <h1>Hotel Manager</h1>
                 </div>
                 <!-- Form -->
-                <form class="form-horizontal mt-3" id="loginform" action="index.html">
+                <form class="form-horizontal mt-3" id="loginform" action="{{url('login')}}" method="post">
+                    @csrf
                     <div class="row pb-4">
                         <div class="col-12">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                      <span class="input-group-text bg-success text-white h-100" id="basic-addon1">
-                          <i class="mdi mdi-account fs-4"></i></span>
-                            </div>
-                                <input
-                                    type="text"
-                                    class="form-control form-control-lg"
-                                    placeholder="Escriba su nombre de usuario"
-                                    aria-label="Username"
-                                    aria-describedby="basic-addon1"
-                                    required=""
-                                />
+                                    <span class="input-group-text bg-success text-white h-100" id="basic-addon1">
+                                        <i class="mdi mdi-account fs-4"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control form-control-lg" placeholder="Escriba su nombre de usuario" name="usuario">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                      <span
-                          class="input-group-text bg-warning text-white h-100"
-                          id="basic-addon2"
-                      ><i class="mdi mdi-lock fs-4"></i
-                          ></span>
+                                    <span class="input-group-text bg-warning text-white h-100" id="basic-addon2">
+                                        <i class="mdi mdi-lock fs-4"></i>
+                                    </span>
                                 </div>
-                                <input
-                                    type="text"
-                                    class="form-control form-control-lg"
-                                    placeholder="Escriba su contraseña"
-                                    aria-label="Password"
-                                    aria-describedby="basic-addon1"
-                                    required=""
-                                />
+                                <input type="password" class="form-control form-control-lg" placeholder="Escriba su contraseña" name="password" id="password">
+                                <i class="fa fa-eye" id="mostrar"></i>
                             </div>
+                            @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    <div class="error text-danger">{{ $error }}</div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <div class="row justify-content-center">
@@ -50,7 +42,6 @@
                                     Acceder
                                 </button>
                             </div>
-
                         </div>
                     </div>
                 </form>

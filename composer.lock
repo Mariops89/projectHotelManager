@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "62a1f2cf917b11f5aaa87a82ae7e7de6",
+    "content-hash": "d8234d6dfe183aeec26264ec14ce550e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -993,6 +993,38 @@
                 }
             ],
             "time": "2021-04-26T11:24:25+00:00"
+        },
+        {
+            "name": "globalcitizen/php-iban",
+            "version": "v2.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/globalcitizen/php-iban.git",
+                "reference": "4c0fc54877948ac667c0ab29c2d1afbe47705599"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/globalcitizen/php-iban/zipball/4c0fc54877948ac667c0ab29c2d1afbe47705599",
+                "reference": "4c0fc54877948ac667c0ab29c2d1afbe47705599",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "oophp-iban.php",
+                    "php-iban.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "description": "php-iban is a library for parsing and validating IBAN (and IIBAN) bank account information.",
+            "support": {
+                "issues": "https://github.com/globalcitizen/php-iban/issues",
+                "source": "https://github.com/globalcitizen/php-iban/tree/v2.7.5"
+            },
+            "time": "2020-05-03T19:46:35+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -2543,6 +2575,73 @@
                 "source": "https://github.com/opis/closure/tree/3.6.2"
             },
             "time": "2021-04-09T13:42:10+00:00"
+        },
+        {
+            "name": "orumad/laravel-spanish-validator",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orumad/laravel-spanish-validator.git",
+                "reference": "e848fa03a953de986c8731472b1adfa984fbe0b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orumad/laravel-spanish-validator/zipball/e848fa03a953de986c8731472b1adfa984fbe0b5",
+                "reference": "e848fa03a953de986c8731472b1adfa984fbe0b5",
+                "shasum": ""
+            },
+            "require": {
+                "globalcitizen/php-iban": "^2.6",
+                "illuminate/support": "^8.0",
+                "php": "^7.3"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.3",
+                "scrutinizer/ocular": "master-dev"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Orumad\\SpanishValidator\\SpanishValidatorServiceProvider"
+                    ],
+                    "aliases": {
+                        "SpanishValidator": "Orumad\\SpanishValidator\\Facades\\SpanishValidator"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orumad\\SpanishValidator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Muñoz",
+                    "email": "dev@danielmunoz.io",
+                    "homepage": "https://danielmunoz.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel validator for spanish stuff: NIF, NIE, CIF, NSS, IBAN, Postal Code, Phone numbers",
+            "homepage": "https://github.com/orumad/laravel-spanish-validator",
+            "keywords": [
+                "laravel",
+                "laravel package",
+                "laravel validation rules",
+                "laravel validator",
+                "orumad"
+            ],
+            "support": {
+                "issues": "https://github.com/orumad/laravel-spanish-validator/issues",
+                "source": "https://github.com/orumad/laravel-spanish-validator/tree/1.1.2"
+            },
+            "time": "2020-09-17T12:55:46+00:00"
         },
         {
             "name": "phpoption/phpoption",

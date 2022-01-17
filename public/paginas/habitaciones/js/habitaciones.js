@@ -38,7 +38,8 @@ $(function () {
             {data: 'personas', title: 'Número de personas'},
             {data: 'tipo.precio_baja', title: 'Precio en temporada baja'},
             {data: 'tipo.precio_alta', title: 'Precio en temporada alta'},
-            {data: 'estado', title: 'Estado', className: 'text-center',
+            {
+                data: 'estado', title: 'Estado', className: 'text-center',
                 render: function (data, type, row, meta) {
                     if (data === 'Activa') {
                         return `<span class="badge bg-success fs-6">Activa</span>`
@@ -94,42 +95,40 @@ $(function () {
     });
 
 
-    modal_habitaciones.on('click', '.aceptar', function () {
+    modal_habitaciones.on('hidden.bs.modal', function () {
+        limpiarErrores(modal_habitaciones);
+    }).on('click', '.aceptar', function () {
         //cogemos los datos del formulario en JSON
         let datos_form = serializeArrayJson('#form-habitaciones');
-
+        datos_form.id = id_activo
         //enviar los datos al servidor mediante POST (usando AJAX)
-        let datos_envio = {
-            id: id_activo,
-            datos: datos_form
-        };
-        $.post(BASE_URL + 'habitaciones/guardar', datos_envio, function () {
+        $.post(BASE_URL + 'habitaciones/guardar', datos_form, function () {
             //se ejecuta cuando recibe respuesta válida
 
             //recargar el datatables
             table.ajax.reload();
             //ocultar el modal
             modal_habitaciones_bs.hide();
-        })
+        }).fail(function (error) {
+            mostrarErrores(error, modal_habitaciones);
+        });
+
+
+        modal_eliminar.on('click', '.eliminar', function () {
+            //enviar los datos al servidor mediante POST (usando AJAX)
+            let datos_envio = {
+                id: id_activo
+            };
+            $.post(BASE_URL + 'habitaciones/eliminar', datos_envio, function () {
+                //se ejecuta cuando recibe respuesta válida
+
+                //recargar el datatables
+                table.ajax.reload();
+                //ocultar el modal
+                modal_eliminar_bs.hide();
+            })
+        });
+
     });
-
-
-    modal_eliminar.on('click', '.eliminar', function () {
-        //enviar los datos al servidor mediante POST (usando AJAX)
-        let datos_envio = {
-            id: id_activo
-        };
-        $.post(BASE_URL + 'habitaciones/eliminar', datos_envio, function () {
-            //se ejecuta cuando recibe respuesta válida
-
-            //recargar el datatables
-            table.ajax.reload();
-            //ocultar el modal
-            modal_eliminar_bs.hide();
-        })
-    });
-
-
-
 });
 

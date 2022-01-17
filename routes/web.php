@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HabitacionesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\personalController;
 use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\TipoHabitacionesController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Middleware\Acceso;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/dashboard', [DashboardController::class, 'mostrar'])->name('dashboard');
+
 
 Route::get('/clientes', [ClientesController::class, 'listar'])->name('clientes');
 Route::post('/clientes', [ClientesController::class, 'listarAJAX']);
@@ -54,5 +58,7 @@ Route::post('/personal', [PersonalController::class, 'listarAJAX']);
 Route::post('/personal/guardar', [PersonalController::class, 'guardar']);
 Route::post('/personal/eliminar', [PersonalController::class, 'eliminar']);
 
-Route::get('/login', [LoginController::class, 'listar'])->name('login');
+Route::get('/login', [LoginController::class, 'mostrar'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/logout', [LoginController::class, 'logout'])->withoutMiddleware(Acceso::class);
 

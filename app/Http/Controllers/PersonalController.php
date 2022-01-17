@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GuardarPersonalRequest;
 use App\Models\Personal;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
@@ -26,14 +27,14 @@ class PersonalController extends Controller
     }
 
 
-    public function guardar(Request $request)
+    public function guardar(GuardarPersonalRequest $request)
     {
         if (is_null($request->id)) {
             //crear
-            Personal::create($request->datos);
+            Personal::create($request->validated());
         } else {
             //editar
-            Personal::where('id', $request->id)->update($request->datos);
+            Personal::where('id', $request->id)->update($request->validated());
         }
     }
 

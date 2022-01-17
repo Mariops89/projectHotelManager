@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GuardarUsuarioRequest;
 use App\Models\Personal;
-use App\Models\Usuarios;
+use App\Models\Usuario;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
 {
@@ -14,7 +16,7 @@ class UsuariosController extends Controller
     {
 
         $personas = Personal::all();
-        $plantilla->setTitle('Usuarios');
+        $plantilla->setTitle('Usuario');
         $plantilla->setBreadcrumb(array('usuarios'));
         $plantilla->loadDatatables();
         $plantilla->loadSelect2();
@@ -26,25 +28,28 @@ class UsuariosController extends Controller
 
     public function listarAJAX()
     {
-        return Usuarios::with('personal')->get();
+        return Usuario::with('personal')->get();
     }
 
 
-    public function guardar(Request $request)
+    public function guardar(GuardarUsuarioRequest $request)
     {
+        $validated = $request->validated();
+        $validated['password'] = Hash::make($validated['password']);
+
         if (is_null($request->id)) {
             //crear
-            Usuarios::create($request->datos);
+            Usuario::create($validated);
         } else {
             //editar
-            Usuarios::where('id', $request->id)->update($request->datos);
+            Usuario::find($request->id)->update($validated);
         }
     }
 
 
     public function eliminar(Request $request)
     {
-        Usuarios::destroy($request->id);
+        Usuario::destroy($request->id);
     }
 }
 
