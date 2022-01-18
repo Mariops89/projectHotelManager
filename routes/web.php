@@ -63,7 +63,7 @@ Route::get('/login', [LoginController::class, 'mostrar'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->withoutMiddleware(Acceso::class);
 
-Route::get('/incidencias', [IncidenciasController::class, 'listar'])->name('personal');
+Route::get('/incidencias', [IncidenciasController::class, 'listar'])->name('incidencias');
 Route::post('/incidencias', [IncidenciasController::class, 'listarAJAX']);
 Route::post('/incidencias/guardar', [IncidenciasController::class, 'guardar']);
 Route::post('/incidencias/eliminar', [IncidenciasController::class, 'eliminar']);
