@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HabitacionesController;
+use App\Http\Controllers\IncidenciasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\personalController;
 use App\Http\Controllers\ServiciosController;
@@ -62,3 +63,7 @@ Route::get('/login', [LoginController::class, 'mostrar'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->withoutMiddleware(Acceso::class);
 
+Route::get('/incidencias', [IncidenciasController::class, 'listar'])->name('personal');
+Route::post('/incidencias', [IncidenciasController::class, 'listarAJAX']);
+Route::post('/incidencias/guardar', [IncidenciasController::class, 'guardar']);
+Route::post('/incidencias/eliminar', [IncidenciasController::class, 'eliminar']);

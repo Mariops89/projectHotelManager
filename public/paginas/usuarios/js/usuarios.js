@@ -6,6 +6,12 @@ $(function () {
     const modal_eliminar_bs = new bootstrap.Modal(modal_eliminar[0], {backdrop: 'static'});
     let id_activo = null;
 
+    $('#usuarios-perfil').select2({
+        width: '100%',
+        placeholder: 'Seleccione un perfil',
+        allowClear: true //para poder deseleccionar
+    });
+
     $('#usuarios-id_personal').select2({
         width: '100%',
         placeholder: 'Seleccione un empleado',
@@ -37,8 +43,8 @@ $(function () {
                     } else if (data === 2) {
                         return `<span class="badge bg-danger fs-6">No empleado</span>`
                     }
-                }*/
-            },
+                }*/},
+            {data: 'perfil', title: 'Perfil'},
 
             {data: 'id', orderable: false, className: 'text-nowrap', width: '5px', render: function (data, type, row, meta) {
                     return `
@@ -63,10 +69,11 @@ $(function () {
         let tr = $(this).closest('tr');
         let datos = table.row(tr).data();
         id_activo = datos.id;
-        modal_usuarios.find('.modal-title').html('Editar cliente');
+        modal_usuarios.find('.modal-title').html('Editar usuario');
         $('#usuarios-usuario').val(datos.usuario);
         $('#usuarios-password').val('');
         $('#usuarios-id_personal').val(datos.id_personal).trigger('change');
+        $('#usuarios-perfil').val(datos.perfil).trigger('change');
         modal_usuarios_bs.show();
 
     }).on('click', '.eliminar', function () {

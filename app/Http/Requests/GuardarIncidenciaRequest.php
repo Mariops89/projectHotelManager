@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Usuario;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class GuardarUsuarioRequest extends FormRequest
+class GuardarIncidenciaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,11 +24,12 @@ class GuardarUsuarioRequest extends FormRequest
     public function rules()
     {
         return [
-            'usuario' => ['required',
-                Rule::unique(Usuario::class, 'usuario')->ignore($this->id)],
-            'password' => ['required'],
-            'id_personal' => [],
-            'perfil' => ['required'],
+            'tipo' => ['required'],
+            'descripcion' => ['required'],
+            'detalles' => [],
+            'acciones' => ['required'],
+            'fecha_notificacion' => [],
+            'fecha_resolucion' => [],
         ];
     }
 }

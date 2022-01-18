@@ -26,7 +26,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Editar usuario</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -52,6 +52,17 @@
                                     @foreach($data['personas'] as $persona)
                                         <option value="{{$persona->id}}">{{$persona->nombre}}</option>
                                     @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="usuarios-perfil" class="form-label">Perfila</label>
+                                <select class="form-control" id="usuarios-perfil" name="perfil">
+                                    <option value="administrador">Administrador</option>
+                                    <option value="mostrador">Mostrador</option>
+                                    <option value="administrador">Mantenimiento</option>
+                                    <option value="administrador">Limpieza</option>
                                 </select>
                             </div>
                         </div>
