@@ -6,16 +6,22 @@ $(function () {
     const modal_eliminar_bs = new bootstrap.Modal(modal_eliminar[0], {backdrop: 'static'});
     let id_activo = null;
 
-    /*$('#incidencia-tipo').select2({
+    $('#incidencia-habitacion').select2({
+        width: '100%',
+        placeholder:'Seleccione la habitación',
+    });
+
+    $('#incidencia-tipo').select2({
         width: '100%',
         minimumResultsForSearch: Infinity,
         placeholder:'Seleccione el tipo de incidencia',
-    });*/
+    });
 
     $('#nueva-incidencia').on('click', function () {
         id_activo = null;
         modal_incidencias.find('.modal-title').html('Nueva incidencia');
         modal_incidencias.find('input').val('');
+        modal_incidencias.find('textarea').val('');
         modal_incidencias_bs.show();
     });
 
@@ -27,23 +33,26 @@ $(function () {
             dataSrc: '',
         },
         columns: [
-            {data: 'tipo', title: 'Tipo'},
+            {
+                data: 'Tipo', title: 'Tipo de urgencia',
+                render: function (data, type, row, meta) {
+                    switch (data) {
+                        case 'urgente' :
+                            return '<span class="badge bg-danger fs-6">Urgente</span>'
+                        case 'moderado' :
+                            return '<span class="badge bg-warning fs-6">Moderada</span>'
+                        case 'no_urgente' :
+                            return '<span class="badge bg-success fs-6">No urgente</span>'
+                    }
+                }
+            },
             {data: 'descripcion', title: 'Descripción'},
             {data: 'fecha_notificacion', title: 'Fecha de notificación'},
             {data: 'fecha_resolucion', title: 'Fecha de resolución'},
             {data: 'detalles', title: 'Detalles'},
             {data: 'acciones', title: 'Acciones'},
-            {data: 'id_personal', title: 'id_personal'},
-            {data: 'id_habitacion', title: 'id_habitacion',
-
-                render: function (data, type, row, meta) {
-                    if (data === 'activo') {
-                        return `<span class="badge bg-success fs-6">Activo</span>`
-                    } else {
-                        return `<span class="badge bg-danger fs-6">Inactivo</span>`
-                    }
-                }
-            },
+            {data: 'id_personal', title: 'Personal'},
+            {data: 'habitacion.numero', title: 'Habitación'},
             {data: 'id', orderable: false, className: 'text-nowrap', width: '5px', render: function (data, type, row, meta) {
                     return `
                     <button class="btn btn btn-outline-secondary btn-xs editar">
@@ -68,14 +77,14 @@ $(function () {
         let datos = table.row(tr).data();
         id_activo = datos.id;
         modal_incidencias.find('.modal-title').html('Editar servicio');
-        $('#incidencia-tipo').val(datos.tipo); //lo mete en el formulario
+        $('#incidencia-tipo').val(datos.Tipo).trigger('change'); //lo mete en el formulario
         $('#incidencia-descripcion').val(datos.descripcion);
-        $('#incidencia-id_personal').val(datos.id_personal.toLowerCase()).trigger('change');
-        $('#incidencia-id_habitacion').val(datos.id_habitacion);
-        $('#incidencia-fecha_notificacion').val(datos.fecha_notificacion);
-        $('#incidencia-fecha_resolucion').val(datos.fecha_resolucion);
+        //$('#incidencia-id_personal').val(datos.id_personal.toLowerCase()).trigger('change');
+        $('#incidencia-habitacion').val(datos.id_habitacion).trigger('change');
+        // $('#incidencia-fecha_notificacion').val(datos.fecha_notificacion);
+        // $('#incidencia-fecha_resolucion').val(datos.fecha_resolucion);
         $('#incidencia-detalles').val(datos.detalles);
-        $('#incidencia-acciones').val(datos.acciones);
+        //$('#incidencia-acciones').val(datos.acciones);
 
         modal_incidencias_bs.show();
 
@@ -100,7 +109,6 @@ $(function () {
         //cogemos los datos del formulario en JSON
         let datos_form = serializeArrayJson('#form-incidencias');
         datos_form.id = id_activo
-
         //enviar los datos al servidor mediante POST (usando AJAX)
         $.post(BASE_URL + 'incidencias/guardar', datos_form, function () {
             //se ejecuta cuando recibe respuesta válida

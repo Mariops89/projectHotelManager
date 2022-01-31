@@ -16,7 +16,7 @@ class HabitacionesController extends Controller
         $tipos = TipoHabitacion::all();
 
         $plantilla->setTitle('Habitaciones');
-        $plantilla->setBreadcrumb(array('habitaciones'));
+        $plantilla->setBreadcrumb(array('Habitaciones'));
         $plantilla->loadDatatables();
         $plantilla->loadSelect2();
         $plantilla->setJs('paginas/habitaciones/js/habitaciones.js');

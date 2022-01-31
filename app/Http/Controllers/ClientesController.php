@@ -13,7 +13,7 @@ class ClientesController extends Controller
     public function listar(PlantillaService $plantilla)
     {
         $plantilla->setTitle('Clientes');
-        $plantilla->setBreadcrumb(array('clientes'));
+        $plantilla->setBreadcrumb(array('Clientes'));
         $plantilla->loadDatatables();
         $plantilla->setJs('paginas/clientes/js/clientes.js'); //esto es el js, no la vista
 

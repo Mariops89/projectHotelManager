@@ -12,4 +12,10 @@ class Incidencia extends Model
     protected $table = 'incidencias';
 
     protected $guarded = [];
+
+
+   public function habitacion()
+    {
+        return $this->belongsTo(Habitacion::class, 'id_habitacion');
+    }
 }

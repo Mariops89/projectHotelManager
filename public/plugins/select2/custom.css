@@ -1,0 +1,9 @@
+.select2-selection.select2-selection--multiple {
+    height: 100%;
+}
+
+.select2-selection--multiple .select2-selection__choice {
+    background-color: #2255a4 !important;
+    border-color: #2255a4 !important;
+    color: #fff !important;
+}

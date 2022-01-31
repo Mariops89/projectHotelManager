@@ -114,6 +114,8 @@
 <script src="{{url('plantilla/dist/js/sidebarmenu.js')}}"></script>
 <!--Custom JavaScript -->
 <script src="{{url('plantilla/dist/js/custom.min.js')}}"></script>
+<!--Custom Moment -->
+<script src="{{url('plantilla/assets/libs/moment/moment.js')}}"></script>
 
 <script>
     const BASE_URL = '{{url('/')}}/';

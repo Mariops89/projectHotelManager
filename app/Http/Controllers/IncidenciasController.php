@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GuardarClienteRequest;
 use App\Http\Requests\GuardarIncidenciaRequest;
+use App\Models\Habitacion;
 use App\Models\Incidencia;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
@@ -13,18 +14,21 @@ class IncidenciasController extends Controller
 
     public function listar(PlantillaService $plantilla)
     {
-        $plantilla->setTitle('incidencias');
-        $plantilla->setBreadcrumb(array('incidencias'));
+        $habitaciones = Habitacion::all();
+
+        $plantilla->setTitle('Incidencias');
+        $plantilla->setBreadcrumb(array('Incidencias'));
         $plantilla->loadDatatables();
+        $plantilla->loadSelect2();
         $plantilla->setJs('paginas/incidencias/js/incidencias.js'); //esto es el js, no la vista
 
-        return $plantilla->load('incidencias/incidencias'); //la vista
+        return $plantilla->load('incidencias/incidencias' , ['habitaciones' => $habitaciones]); //cargo la vista y creo el array
     }
 
 
     public function listarAJAX()
     {
-        return Incidencia::all();
+        return Incidencia::with('habitacion')->get();
     }
 
 

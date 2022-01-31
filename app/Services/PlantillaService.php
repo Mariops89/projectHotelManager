@@ -73,8 +73,17 @@ class PlantillaService
     public function loadSelect2()
     {
         $this->setCss('plugins/select2/dist/css/select2.min.css');
+        $this->setCss('plugins/select2/custom.css');
         $this->setJs('plugins/select2/dist/js/select2.full.min.js');
         $this->setJs('plugins/select2/dist/js/i18n/es.js');
+    }
+
+
+    public function loadDaterangepicker()
+    {
+        $this->setCss('plugins/daterangepicker/daterangepicker.css');
+        $this->setJs('plugins/daterangepicker/custom.js');
+        $this->setJs('plugins/daterangepicker/daterangepicker.js');
     }
 
 }

@@ -14,8 +14,8 @@ class ServiciosController extends Controller
     {
         $tipos = Servicio::all();
 
-        $plantilla->setTitle('Servicio');
-        $plantilla->setBreadcrumb(array('servicios'));
+        $plantilla->setTitle('Servicios');
+        $plantilla->setBreadcrumb(array('Servicios'));
         $plantilla->loadDatatables();
         $plantilla->loadSelect2();
         $plantilla->setJs('paginas/servicios/js/servicios.js');

@@ -24,12 +24,10 @@ class GuardarIncidenciaRequest extends FormRequest
     public function rules()
     {
         return [
-            'tipo' => ['required'],
+            'Tipo' => ['required'],
             'descripcion' => ['required'],
             'detalles' => [],
-            'acciones' => ['required'],
-            'fecha_notificacion' => [],
-            'fecha_resolucion' => [],
+            'id_habitacion' => [],
         ];
     }
 }

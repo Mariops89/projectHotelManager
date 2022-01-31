@@ -2,7 +2,15 @@ function serializeArrayJson(formulario) {
     let datos_form = $(formulario).serializeArray();
     let json = {};
     $.each(datos_form, function (k, v) {
-        json[v.name] = v.value;
+        if (v.name.indexOf('[]') === -1) {
+            json[v.name] = v.value;
+        } else {
+            let name = v.name.slice(0, -2);
+            if (json[name] === undefined) {
+                json[name] = [];
+            }
+            json[name].push(v.value);
+        }
     });
 
     return json;

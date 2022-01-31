@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function mostrar(PlantillaService $plantilla)
     {
         $plantilla->setTitle('Dashboard');
-        $plantilla->setBreadcrumb(array('dashboard'));
+        $plantilla->setBreadcrumb(array('Dashboard'));
 
         return $plantilla->load('dashboard/dashboard'); //la vista
     }
