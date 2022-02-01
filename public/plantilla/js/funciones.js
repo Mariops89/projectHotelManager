@@ -37,3 +37,19 @@ function mostrarErrores(error, container) {
         })
     }
 }
+
+
+function renderDate(data, type, row, meta) {
+    if (data !== null && type !== 'sort') {
+        data = moment(data).format('DD/MM/YYYY');
+    }
+    return data;
+}
+
+
+function renderDatetime(data, type, row, meta) {
+    if (data !== null && type !== 'sort') {
+        data = moment(data).format('DD/MM/YYYY HH:mm:ss');
+    }
+    return data;
+}

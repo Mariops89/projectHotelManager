@@ -5,6 +5,7 @@ $(function () {
     const modal_eliminar = $('#modal-eliminar');
     const modal_eliminar_bs = new bootstrap.Modal(modal_eliminar[0], {backdrop: 'static'});
     let id_activo = null;
+    let numero = null;
 
     $('#incidencia-habitacion').select2({
         width: '100%',
@@ -34,26 +35,36 @@ $(function () {
         },
         columns: [
             {
-                data: 'Tipo', title: 'Tipo de urgencia',
+                data: 'Tipo', title: 'Urgencia',
                 render: function (data, type, row, meta) {
-                    switch (data) {
-                        case 'urgente' :
-                            return '<span class="badge bg-danger fs-6">Urgente</span>'
-                        case 'moderado' :
-                            return '<span class="badge bg-warning fs-6">Moderada</span>'
-                        case 'no_urgente' :
-                            return '<span class="badge bg-success fs-6">No urgente</span>'
+                    console.log('aquí entra?');
+                    if (type === 'sort') { // si se da el botón de ordenar
+                        console.log('adios');
+                        if (data === 'urgente') {
+                            numero = 1;
+                            console.log(numero);
+                        } else if (data === 'moderado') {
+                            numero = 2;
+                        } else if (data === 'no_urgente') {
+                            numero = 3;
+                        }
                     }
-                }
+                    console.log('hola');
+                    if (data === 'urgente'){ // html
+                        return '<span class="badge bg-danger fs-6">Urgente</span>'
+                    } else if (data === 'moderado'){
+                        return '<span class="badge bg-warning fs-6">Moderada</span>'
+                    } else if (data === 'no_urgente'){
+                        return '<span class="badge bg-success fs-6">No urgente</span>'
+                    }
+                },
             },
             {data: 'descripcion', title: 'Descripción'},
-            {data: 'fecha_notificacion', title: 'Fecha de notificación'},
-            {data: 'fecha_resolucion', title: 'Fecha de resolución'},
-            {data: 'detalles', title: 'Detalles'},
-            {data: 'acciones', title: 'Acciones'},
-            {data: 'id_personal', title: 'Personal'},
+            {data: 'fecha_notificacion', title: 'Fecha de notificación', render: renderDatetime},
+            {data: 'fecha_resolucion', title: 'Fecha de resolución', render: renderDatetime},
             {data: 'habitacion.numero', title: 'Habitación'},
-            {data: 'id', orderable: false, className: 'text-nowrap', width: '5px', render: function (data, type, row, meta) {
+            {data: 'id', orderable: false, className: 'text-nowrap', width: '5px',
+                render: function (data, type, row, meta) {
                     return `
                     <button class="btn btn btn-outline-secondary btn-xs editar">
                         <i class="fa fa-pencil-alt"></i>
@@ -66,7 +77,7 @@ $(function () {
         language: datatables_locale,
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
         pageLength: 10,
-        order: [[1, 'asc'], [2, 'asc']],
+        order: [[2, 'asc']],
         scrollX: true,
         drawCallback: function(settings) {
 

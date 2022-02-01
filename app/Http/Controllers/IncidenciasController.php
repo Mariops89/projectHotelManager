@@ -8,6 +8,7 @@ use App\Models\Habitacion;
 use App\Models\Incidencia;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class IncidenciasController extends Controller
 {
@@ -22,7 +23,7 @@ class IncidenciasController extends Controller
         $plantilla->loadSelect2();
         $plantilla->setJs('paginas/incidencias/js/incidencias.js'); //esto es el js, no la vista
 
-        return $plantilla->load('incidencias/incidencias' , ['habitaciones' => $habitaciones]); //cargo la vista y creo el array
+        return $plantilla->load('incidencias/incidencias', ['habitaciones' => $habitaciones]); //cargo la vista y creo el array
     }
 
 
@@ -36,11 +37,14 @@ class IncidenciasController extends Controller
     {
         if (is_null($request->id)) {
             //crear
-            Incidencia::create($request->validated());
+            $array = $request->validated();
+            $array ['fecha_notificacion'] = Carbon::now();
+            Incidencia::create($array);
         } else {
             //editar
             Incidencia::where('id', $request->id)->update($request->validated());
         }
+
     }
 
 
