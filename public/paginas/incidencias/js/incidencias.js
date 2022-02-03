@@ -37,24 +37,20 @@ $(function () {
             {
                 data: 'Tipo', title: 'Urgencia',
                 render: function (data, type, row, meta) {
-                    console.log('aquí entra?');
-                    if (type === 'sort') { // si se da el botón de ordenar
-                        console.log('adios');
-                        if (data === 'urgente') {
-                            numero = 1;
-                            console.log(numero);
-                        } else if (data === 'moderado') {
-                            numero = 2;
-                        } else if (data === 'no_urgente') {
-                            numero = 3;
-                        }
-                    }
-                    console.log('hola');
                     if (data === 'urgente'){ // html
+                        if (type === 'sort') {
+                            return 1;
+                        }
                         return '<span class="badge bg-danger fs-6">Urgente</span>'
                     } else if (data === 'moderado'){
+                        if (type === 'sort') {
+                            return 2;
+                        }
                         return '<span class="badge bg-warning fs-6">Moderada</span>'
                     } else if (data === 'no_urgente'){
+                        if (type === 'sort') {
+                            return 3;
+                        }
                         return '<span class="badge bg-success fs-6">No urgente</span>'
                     }
                 },

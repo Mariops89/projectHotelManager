@@ -7,6 +7,7 @@ use App\Http\Controllers\IncidenciasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\personalController;
 use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\TipoHabitacionesController;
 use App\Http\Controllers\UsuariosController;
@@ -69,6 +70,10 @@ Route::post('/incidencias', [IncidenciasController::class, 'listarAJAX']);
 Route::post('/incidencias/guardar', [IncidenciasController::class, 'guardar']);
 Route::post('/incidencias/eliminar', [IncidenciasController::class, 'eliminar']);
 
-//Route::get('/reservas', [ReservasController::class, 'listar'])->name('reservas');
-Route::get('/reservas/nueva', [ReservaController::class, 'mostrar'])->name('reservas');
+Route::get('/reservas', [ReservasController::class, 'listar'])->name('reservas');
+Route::post('/reservas', [ReservasController::class, 'listarAJAX']);
+
+Route::get('/reservas/nueva', [ReservaController::class, 'mostrar'])->name('nueva-reserva');
 Route::post('/reservas/buscar-disponibles', [ReservaController::class, 'buscarHabitacionesDisponiblesAJAX']);
+Route::post('/reservas/buscar-cliente', [ReservaController::class, 'buscarClienteAJAX']);
+Route::post('/reservas/confirmar', [ReservaController::class, 'confirmarReservaAJAX']);

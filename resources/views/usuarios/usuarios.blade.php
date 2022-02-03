@@ -57,7 +57,7 @@
                         </div>
                         <div class="col">
                             <div class="mb-3">
-                                <label for="usuarios-perfil" class="form-label">Perfila</label>
+                                <label for="usuarios-perfil" class="form-label">Perfil</label>
                                 <select class="form-control" id="usuarios-perfil" name="perfil">
                                     <option value="administrador">Administrador</option>
                                     <option value="mostrador">Mostrador</option>

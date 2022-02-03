@@ -9,7 +9,7 @@ $(function () {
     $('#usuarios-perfil').select2({
         width: '100%',
         placeholder: 'Seleccione un perfil',
-        allowClear: true //para poder deseleccionar
+        allowClear: false //para poder deseleccionar
     });
 
     $('#usuarios-id_personal').select2({

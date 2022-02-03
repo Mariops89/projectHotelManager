@@ -18,4 +18,16 @@ class Reserva extends Model
     {
         return $query->where('fecha_salida', '>=', $inicio)->where('fecha_entrada', '<=', $fin);
     }
+
+
+    public function habitacion()
+    {
+        return $this->belongsTo(Habitacion::class, 'id_habitacion');
+    }
+
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class, 'id_cliente');
+    }
 }

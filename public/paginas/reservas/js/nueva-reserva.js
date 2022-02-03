@@ -1,6 +1,12 @@
 $(function () {
 
     let card_buscar = $('#card-buscar');
+    let card_cliente = $('#card-cliente');
+    const modal_confirmacion = $('#modal-confirmacion');
+    const modal_modal_confirmacion_bs = new bootstrap.Modal(modal_confirmacion[0], {backdrop: 'static'});
+
+    let id_cliente;
+    let habitacion_activa;
 
     $('#reserva-fechas').daterangepicker({
         locale: bootstrap_daterangepicker_locale
@@ -15,6 +21,9 @@ $(function () {
 
     $('#buscar').on('click', function () {
         limpiarErrores(card_buscar)
+        card_cliente.hide();
+        $('#cliente-no-encontrado').hide();
+        $('#datos-cliente').hide();
         //cogemos los datos del formulario en JSON
         let datos_form = serializeArrayJson('#form-buscar');
         //enviar los datos al servidor mediante POST (usando AJAX)
@@ -39,7 +48,7 @@ $(function () {
                 width: '5px',
                 render: function (data, type, row, meta) {
                     return `
-                        <button class="btn btn btn-outline-secondary btn-xs seleccionar">
+                        <button class="btn btn btn-outline-secondary btn-xs seleccionar fs-6">
                             <i class="far fa-calendar-check"></i> Seleccionar
                         </button>`;
                 }
@@ -50,16 +59,64 @@ $(function () {
         pageLength: 10,
         order: [[1, 'asc'], [2, 'asc']],
         scrollX: true,
+        select: {
+            style: 'single',
+            selector: false
+        },
         drawCallback: function (settings) {
 
         }
 
-
     }).on('click', '.seleccionar', function () {
         let tr = $(this).closest('tr');
-        let datos = table.row(tr).data();
+        habitacion_activa = table.row(tr).data();
+        table.rows(tr).select();
+        $('#reserva-cliente-dni').val('');
+        card_cliente.show();
+    });
 
 
+    $('#buscar-cliente').on('click', function () {
+        $('#cliente-no-encontrado').hide();
+        $('#datos-cliente').hide();
+        let datos_form = {
+            dni: $('#reserva-cliente-dni').val()
+        };
+        $.post(BASE_URL + 'reservas/buscar-cliente', datos_form, function (cliente) {
+                if (cliente === null) {
+                    $('#cliente-no-encontrado').show();
+                } else {
+                    id_cliente = cliente.id;
+                    $('#datos-cliente .dni').html(cliente.dni);
+                    $('#datos-cliente .nombre').html(cliente.nombre);
+                    $('#datos-cliente .apellidos').html(cliente.apellidos);
+                    $('#datos-cliente .telefono').html(cliente.telefono);
+                    $('#datos-cliente .direccion').html(cliente.direccion);
+                    $('#datos-cliente .cp').html(cliente.cod_postal);
+                    $('#datos-cliente .localidad').html(cliente.localidad);
+                    $('#datos-cliente .provincia').html(cliente.provincia);
+                    $('#datos-cliente .pais').html(cliente.pais);
+                    $('#datos-cliente').show();
+                }
+            }, 'json').fail(function (error) {
+            mostrarErrores(error, card_buscar);
+        });
+    });
+
+
+    $('#confirmar-reserva').on('click', function () {
+        $('#cliente-no-encontrado').hide();
+        $('#datos-cliente').hide();
+        let datos_form = {
+            id_cliente: id_cliente,
+            id_habitacion: habitacion_activa.id,
+            precio: habitacion_activa.precio_estancia,
+            personas: $('#reserva-personas').val(),
+            fechas: $('#reserva-fechas').val(),
+        };
+        $.post(BASE_URL + 'reservas/confirmar', datos_form, function () {
+            modal_modal_confirmacion_bs.show();
+        });
     });
 
 })
