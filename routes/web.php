@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FacturasController;
 use App\Http\Controllers\HabitacionesController;
 use App\Http\Controllers\IncidenciasController;
 use App\Http\Controllers\LoginController;
@@ -13,7 +14,7 @@ use App\Http\Controllers\TipoHabitacionesController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Middleware\Acceso;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\LimpiezasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,3 +78,20 @@ Route::get('/reservas/nueva', [ReservaController::class, 'mostrar'])->name('nuev
 Route::post('/reservas/buscar-disponibles', [ReservaController::class, 'buscarHabitacionesDisponiblesAJAX']);
 Route::post('/reservas/buscar-cliente', [ReservaController::class, 'buscarClienteAJAX']);
 Route::post('/reservas/confirmar', [ReservaController::class, 'confirmarReservaAJAX']);
+Route::post('/reservas/eliminar', [ReservasController::class, 'eliminar']);
+
+Route::get('/facturas', [FacturasController::class, 'listar'])->name('facturas');
+Route::post('/facturas', [FacturasController::class, 'listarAJAX']);
+Route::post('/facturas/guardar', [FacturasController::class, 'guardar']);
+Route::post('/facturas/eliminar', [FacturasController::class, 'eliminar']);
+
+
+
+
+
+
+Route::get('/limpiezas', [LimpiezasController::class, 'listar'])->name('limpiezas');
+
+//Route::get('/incidencias', [IncidenciasController::class, 'listar'])->name('incidencias');
+
+//Route::get('/incidencias', [IncidenciasController::class, 'listar'])->name('incidencias');

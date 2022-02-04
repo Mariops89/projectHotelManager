@@ -42,7 +42,7 @@
                            <div><label>Número de personas: </label> <span class="personas-reserva"></span></div>
                            <div><label>Precio: </label> <span class="precio-reserva"></span></div>
                            <div><label>Late ckeckout: </label> <span class="late-checkout-reserva"></span></div>
-                           <div><label>Check-in: </label> <span class="chekin-reserva"></span></div>
+                           <div><label>Check-in: </label> <span class="check-in-reserva"></span></div>
                            <div><label>Check-out: </label> <span class="check-out-reserva"></span></div>
                        </div>
                    </div>
@@ -74,5 +74,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </div>

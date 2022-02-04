@@ -40,9 +40,15 @@ $(function () {
             {data: 'fecha_salida', title: 'Fecha de salida', render: renderDate},
             {data: 'personas', title: 'Número de personas'},
             {data: 'precio', title: 'Precio'},
-            {data: 'late_checkout', title: 'Late checkout'},
-            {data: 'timestamp_salida', title: 'Check in'},
-            {data: 'timestamp_entrada', title: 'Check out'},
+            {data: 'late_checkout', title: 'Late checkout',
+
+                render: function (data, type, row, meta) {
+                    if (data === 0) {
+                        return '<span>No</span>'
+                    } else {
+                        return '<span>Sí</span>'
+                    }
+                }},
             {
                 data: 'id',
                 orderable: false,
@@ -70,29 +76,33 @@ $(function () {
 
 
     }).on('click', '.detalles', function () {
-        let table2 = $('#tabla-clientes').DataTable;
         let tr = $(this).closest('tr');
         let datos = table.row(tr).data();
-        let cliente = table2.row(tr).data();
-        id_activo = datos.id;
+
+        console.log(datos);
+
         modal_detalles.find('.modal-title').html('Reserva # ' + datos.id)
         $('#datos-reserva .numero-reserva').html(datos.id);
-        $('#datos-reserva .habitacion-reserva').html(datos.numero);
-        $('#datos-reserva .fecha-entrada').html(datos.fecha_entrada);
-        $('#datos-reserva .fecha-salida').html(datos.fecha_salida);
+        $('#datos-reserva .habitacion-reserva').html(datos.habitacion.numero);
+        $('#datos-reserva .fecha-entrada').html(dateFormat(datos.fecha_entrada));
+        $('#datos-reserva .fecha-salida').html(dateFormat(datos.fecha_salida));
         $('#datos-reserva .personas-reserva').html(datos.personas);
         $('#datos-reserva .precio-reserva').html(datos.precio);
         $('#datos-reserva .late-checkout-reserva').html(datos.late_ckeckout);
+        $('#datos-reserva .check-in-reserva').html(datos.timestamp_entrada);
+        $('#datos-reserva .check-out-reserva').html(datos.timestamp_salida);
 
-        $('#datos-cliente .dni-cliente-reserva').val(cliente.dni);
-        $('#datos-cliente .nombre-cliente-reserva').val(cliente.nombre);
-        $('#datos-cliente .apellidos-cliente-reserva').val(cliente.apellidos);
-        $('#datos-cliente .telefono-cliente-reserva').val(cliente.telefono);
-        $('#datos-cliente .direccion-cliente-reserva').val(cliente.direccion);
-        $('#datos-cliente .localidad-cliente-reserva').val(cliente.localidad);
-        $('#datos-cliente .od_postal-cliente-reserva').val(cliente.cod_postal);
-        $('#datos-cliente .provincia-cliente-reserva').val(cliente.provincia);
-        $('#datos-cliente .pais').val(cliente.pais);
+
+
+        $('#datos-cliente .dni-cliente-reserva').html(datos.cliente.dni);
+        $('#datos-cliente .nombre-cliente-reserva').html(datos.cliente.nombre);
+        $('#datos-cliente .apellidos-cliente-reserva').html(datos.cliente.apellidos);
+        $('#datos-cliente .telefono-cliente-reserva').html(datos.cliente.telefono);
+        $('#datos-cliente .direccion-cliente-reserva').html(datos.cliente.direccion);
+        $('#datos-cliente .localidad-cliente-reserva').html(datos.cliente.localidad);
+        $('#datos-cliente .cp_postal-cliente-reserva').html(datos.cliente.cod_postal);
+        $('#datos-cliente .provincia-cliente-reserva').html(datos.cliente.provincia);
+        $('#datos-cliente .pais').html(datos.cliente.pais);
 
         modal_detalles_bs.show();
 
@@ -123,8 +133,8 @@ $(function () {
         let tr = $(this).closest('tr');
         let datos = table.row(tr).data();
         id_activo = datos.id;
-        modal_eliminar.find('.modal-title-text').html('Eliminar habitación');
-        modal_eliminar.find('.mensaje').html(`¿Está seguro de que quiere eliminar la habtiación <i class="text-nowrap">${datos.numero}</i>?`);
+        modal_eliminar.find('.modal-title-text').html('Eliminar reserva');
+        modal_eliminar.find('.mensaje').html(`¿Está seguro de que quiere eliminar la reserva <i class="text-nowrap">${datos.id}</i>?`);
         modal_eliminar_bs.show();
     });
 

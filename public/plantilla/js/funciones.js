@@ -53,3 +53,11 @@ function renderDatetime(data, type, row, meta) {
     }
     return data;
 }
+
+function  dateFormat(date){
+    return moment(date).format('DD/MM/YYYY');
+}
+
+function  dateTimeFormat(date){
+    return moment(date).format('DD/MM/YYYY HH:mm:ss');
+}
