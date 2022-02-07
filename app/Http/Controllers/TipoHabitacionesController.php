@@ -32,7 +32,7 @@ class TipoHabitacionesController extends Controller
             TipoHabitacion::create($request->validated());
         } else {
             //editar
-            TipoHabitacion::where('id', $request->id)->update($request->validated());
+            TipoHabitacion::find($request->id)->update($request->validated());
         }
     }
 

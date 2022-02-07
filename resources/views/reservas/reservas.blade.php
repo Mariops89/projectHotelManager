@@ -64,12 +64,15 @@
                             <div><label>País: </label> <span class="pais-cliente-reserva"></span></div>
                         </div>
                     </div>
-            <div class="modal-footer justify-content-between">
+            <div class="modal-footer justify-content-between" id="detalles-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="fa fa-times"></i> Cerrar
                 </button>
-                <button type="button" class="btn btn-success aceptar">
-                    <i class="fa fa-check"></i> Aceptar
+                <button type="button" class="btn btn-success mx-auto check-in-buttom">
+                    <i class="fa fa-check"></i> Checkin
+                </button>
+                <button type="button" class="btn btn-success check-out-buttom">
+                    <i class="fa fa-check"></i> Checkout
                 </button>
             </div>
         </div>

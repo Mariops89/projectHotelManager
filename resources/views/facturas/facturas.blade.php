@@ -57,6 +57,7 @@
                             <div class="mb-3">
                                 <label for="factura-fecha-pago" class="form-label">Fecha de pago</label>
                                 <input type="text" class="form-control" id="factura-fecha-pago" name="timestamp_pago">
+                                <script></script>
                             </div>
                         </div>
                     </div>

@@ -42,7 +42,7 @@ class IncidenciasController extends Controller
             Incidencia::create($array);
         } else {
             //editar
-            Incidencia::where('id', $request->id)->update($request->validated());
+            Incidencia::find($request->id)->update($request->validated());
         }
 
     }

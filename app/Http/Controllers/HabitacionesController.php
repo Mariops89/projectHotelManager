@@ -36,7 +36,7 @@ class HabitacionesController extends Controller
             Habitacion::create($request->validated());
         } else {
             //editar
-            Habitacion::where('id', $request->id)->update($request->validated());
+            Habitacion::find($request->id)->update($request->validated());
         }
     }
 

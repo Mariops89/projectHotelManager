@@ -45,7 +45,7 @@ class FacturasController
             Factura::create($request->validated());
         } else {
             //editar
-            Factura::where('id', $request->id)->update($request->validated());
+            Factura::find($request->id)->update($request->validated());
         }
 
     }

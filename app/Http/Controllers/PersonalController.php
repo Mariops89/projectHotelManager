@@ -34,7 +34,7 @@ class PersonalController extends Controller
             Personal::create($request->validated());
         } else {
             //editar
-            Personal::where('id', $request->id)->update($request->validated());
+            Personal::find($request->id)->update($request->validated());
         }
     }
 

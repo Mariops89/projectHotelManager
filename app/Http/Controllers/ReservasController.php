@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GuardarIncidenciaRequest;
 use App\Models\Habitacion;
-use App\Models\Incidencia;
-use App\Models\Cliente;
 use App\Models\Reserva;
 use App\Services\PlantillaService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReservasController
@@ -43,11 +42,28 @@ class ReservasController
             Reserva::create($request->validated());
         } else {
             //editar
-            Reserva::where('id', $request->id)->update($request->validated());
+            Reserva::find($request->id)->update($request->validated());
+            dd($_POST);
         }
 
     }
 
+    public function guardarCheckin (Request $request)
+    {
+        //$array = $request;
+        //$array ['timestamp_salida'] = Carbon::now();
+
+        Reserva::find($request->id)->update(['timestamp_entrada' => Carbon::now()]);
+    }
+
+    public function guardarCheckout (Request $request)
+    {
+        //$array = $request;
+        //$array ['timestamp_salida'] = Carbon::now();
+
+        Reserva::find($request->id)->update(['timestamp_salida' => Carbon::now()]);
+        //dd($array);
+    }
 
     public function eliminar(Request $request)
     {

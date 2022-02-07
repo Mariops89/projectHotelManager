@@ -34,7 +34,7 @@ class ClientesController extends Controller
             Cliente::create($request->validated());
         } else {
             //editar
-            Cliente::where('id', $request->id)->update($request->validated());
+            Cliente::find($request->id)->update($request->validated());
         }
     }
 

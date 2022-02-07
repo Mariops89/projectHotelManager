@@ -35,7 +35,7 @@ class ServiciosController extends Controller
             Servicio::create($request->validated());
         } else {
             //editar
-            Servicio::where('id', $request->id)->update($request->validated());
+            Servicio::find($request->id)->update($request->validated());
         }
     }
 

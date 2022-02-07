@@ -122,7 +122,7 @@ $(function () {
     modal_eliminar.on('click', '.eliminar', function () {
         //enviar los datos al servidor mediante POST (usando AJAX)
         let datos_envio = {
-            id: id_activo
+            id: id_activo // le decimos al servidor que su id es el id_activo
         };
         $.post(BASE_URL + 'facturas/eliminar', datos_envio, function () {
             //se ejecuta cuando recibe respuesta válida
