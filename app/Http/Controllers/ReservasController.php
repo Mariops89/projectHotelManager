@@ -50,6 +50,7 @@ class ReservasController
 
     public function guardarCheckin (Request $request)
     {
+
         //$array = $request;
         //$array ['timestamp_salida'] = Carbon::now();
 

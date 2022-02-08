@@ -105,39 +105,47 @@ $(function () {
 
         modal_detalles_bs.show();
 
-        modal_detalles.on('click', '.check-in-buttom', function () {
-            let datos = table.row(tr).data();
-            console.log(datos);
-            id_activo = datos.id; //le mandamos el id a PHP
-            let datos_envio = {
-                id: id_activo
-            };
+        if (datos.timestamp_entrada === null) {
+            //console.log('Entrada: ' + datos.timestamp_entrada);
+
+            modal_detalles.on('click', '.check-in-buttom', function () {
+                let datos = table.row(tr).data();
+                console.log(datos);
+                let datos_envio = {
+                    id: datos.id //le mandamos el id a PHP
+                };
 
 
-            //petición para guardar los timestamp
-            //no entra aqui
-            $.post(BASE_URL + 'reservas/guardarcheckin', datos_envio, function () {
-                console.log(id_activo);
+                //petición para guardar los timestamp
+                //no entra aqui
+                $.post(BASE_URL + 'reservas/guardarcheckin', datos_envio, function () {
+                    //console.log(id_activo);
 
-                modal_detalles_bs.hide();
-                $('#detalles-footer .check-in-buttom').hide();
+                    modal_detalles_bs.hide();
+                    $('#detalles-footer .check-in-buttom').hide();
+                })
+            })
+        }else {
+            console.log("entrada: " + datos.timestamp_entrada);
+               $('#detalles-footer .check-in-buttom').hide();
+            }
 
-            });
 
+        if (datos.timestamp_salida === null) {
+            //console.log('Salida: ' + datos.timestamp_salida);
 
             modal_detalles.on('click', '.check-out-buttom', function () {
                 let datos = table.row(tr).data();
                 console.log(datos);
-                id_activo = datos.id; //le mandamos el id a PHP
                 let datos_envio = {
-                    id: id_activo
+                    id: datos.id //le mandamos el id a PHP
                 };
 
 
                 //petición para guardar los timestamp
                 //no entra aqui
                 $.post(BASE_URL + 'reservas/guardarcheckout', datos_envio, function () {
-                    console.log(id_activo);
+                    //console.log(datos.id);
                     //se ejecuta cuando recibe respuesta válida
                     //datos.timestamp_salida = fecha;
 
@@ -145,32 +153,15 @@ $(function () {
                     $('#detalles-footer .check-out-buttom').hide();
 
 
-
                     //ocultar el modal
                     // modal_detalles_bs.hide();
                 })
+            })
+        }else {
+            console.log("salida: " + datos.timestamp_salida);
+            $('#detalles-footer .check-out-buttom').hide();
 
-
-                /*let table2 = $('#tabla-clientes').DataTable({
-                }).on('click', '.detalles', function () {
-                    let tr = $(this).closest('tr');
-                    let cliente = table2.row(tr).data();
-                    id_activo = cliente.id;
-                    $('#datos-cliente .dni-cliente-reserva').val(cliente.dni);
-                    $('#datos-cliente .nombre-cliente-reserva').val(cliente.nombre);
-                    $('#datos-cliente .apellidos-cliente-reserva').val(cliente.apellidos);
-                    $('#datos-cliente .telefono-cliente-reserva').val(cliente.telefono);
-                    $('#datos-cliente .direccion-cliente-reserva').val(cliente.direccion);
-                    $('#datos-cliente .localidad-cliente-reserva').val(cliente.localidad);
-                    $('#datos-cliente .od_postal-cliente-reserva').val(cliente.cod_postal);
-                    $('#datos-cliente .provincia-cliente-reserva').val(cliente.provincia);
-                    $('#datos-cliente .pais').val(cliente.pais);
-                    // $('#datos-reserva .check-in-reserva').html(datos.provincia);
-                    // $('#datos-reserva .chekout-reserva').html(datos.pais);
-                    //lamentable
-                    //esto es para mostrar un elemento oculto
-                    modal_detalles_bs.show();
-                })*/
+            }
 
 
             }).on('click', '.eliminar', function () {
@@ -196,26 +187,7 @@ $(function () {
                     modal_eliminar_bs.hide();
                 })
             });
-            /*  modal_reservas.on('hidden.bs.modal', function () {
-                  limpiarErrores(modal_habitaciones);
-              }).on('click', '.aceptar', function () {
-                  //cogemos los datos del formulario en JSON
-                  let datos_form = serializeArrayJson('#form-habitaciones');
-                  datos_form.id = id_activo
-                  //enviar los datos al servidor mediante POST (usando AJAX)
-                  $.post(BASE_URL + 'habitaciones/guardar', datos_form, function () {
-                      //se ejecuta cuando recibe respuesta válida
-
-                      //recargar el datatables
-                      table.ajax.reload();
-                      //ocultar el modal
-                      modal_habitaciones_bs.hide();
-                  }).fail(function (error) {
-                      mostrarErrores(error, modal_habitaciones);
-                  });*/
 
 
         })
-    })
-})
 

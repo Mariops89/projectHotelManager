@@ -42,6 +42,7 @@ class FacturasController
             //crear
             // $array = $request->validated();
             // $array ['fecha_notificacion'] = Carbon::now();
+            dd($request->all());
             Factura::create($request->validated());
         } else {
             //editar

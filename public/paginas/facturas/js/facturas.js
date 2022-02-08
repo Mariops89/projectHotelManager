@@ -6,13 +6,15 @@ $(function () {
     const modal_eliminar_bs = new bootstrap.Modal(modal_eliminar[0], {backdrop: 'static'});
     let id_activo = null;
 
-   $( function()  {
-       $('#factura-fecha-pago').daterangepicker({
-           singleDatePicker: true,
-           autoApply: true,
-           locale: bootstrap_daterangepicker_locale
-       });
-    } );
+
+   $('#factura-fecha-pago').daterangepicker({
+       singleDatePicker: true,
+       autoApply: true,
+       locale: bootstrap_daterangepicker_locale,
+       startDate:  moment().format('DD/MM/YYYY'),
+       endDate: moment().format('DD/MM/YYYY'),
+   })
+
 
     $('#factura-pago').select2({
         width: '100%',
@@ -31,7 +33,23 @@ $(function () {
     $('#nueva-factura').on('click', function () {
         id_activo = null;
         modal_facturas.find('.modal-title').html('Nueva factura');
-        modal_facturas.find('input').val('');
+        modal_facturas.find('input').val(''); //cuando abres el modal estás vaciando los campoos idiota
+        $('#factura-fecha-pago').data('daterangepicker').setStartDate(moment().format('DD/MM/YYYY'),
+        $('#factura-fecha-pago').data('daterangepicker').setEndDate(moment().format('DD/MM/YYYY')))
+        //no era tan difícil
+        //además, lo único que tiene sentido es poner la fecha cuando abras el modal, porque si no, si la cambias
+        // luego no la volverías a tener otra vez, entiendes?
+        //si, lo veo, pero ser idiota por esto? es un decir
+        //lo sé, pero no te pases de palabrotas
+        //vaaaale
+        //pero ves que solo tiene sentido poner la fecha al darle al botón?
+        //por si la cambias?
+        //si, ya, como cargamos los plugins siempre al principio
+        //y que tendrá que ver
+        // tambien los inicializamos al principio
+        //pues esto igual
+        //bnueno, seguimos por whatsapp
+        //si
         modal_facturas_bs.show();
     });
 
