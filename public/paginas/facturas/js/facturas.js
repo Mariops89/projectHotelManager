@@ -120,9 +120,14 @@ $(function () {
     modal_facturas.on('hidden.bs.modal', function () {
         limpiarErrores(modal_facturas);
     }).on('click', '.aceptar', function () {
+        let tr = $(this).closest('tr');
+        let datos = table.row(tr).data();
+        console.log(datos);
         //cogemos los datos del formulario en JSON
         let datos_form = serializeArrayJson('#form-facturas');
         datos_form.id = id_activo
+        console.log(id_activo);
+
         //enviar los datos al servidor mediante POST (usando AJAX)
         $.post(BASE_URL + 'facturas/guardar', datos_form, function () {
             //se ejecuta cuando recibe respuesta válida

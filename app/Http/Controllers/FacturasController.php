@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GuardarFacturaRequest;
 use App\Http\Requests\GuardarIncidenciaRequest;
 use App\Models\Factura;
+use App\Models\Habitacion;
 use App\Models\Reserva;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ class FacturasController
     public function listar(PlantillaService $plantilla)
     {
         $reservas = Reserva::all();
+        $habitaciones = Habitacion::all();
 
         $plantilla->setTitle('Historial de facturas');
         $plantilla->setBreadcrumb(array('Facturas'));
@@ -40,9 +42,11 @@ class FacturasController
 
         if (is_null($request->id)) {
             //crear
-            // $array = $request->validated();
-            // $array ['fecha_notificacion'] = Carbon::now();
-            dd($request->all());
+            $ultima_factura = (Factura::select('numero')->where('created_at', Factura::max('created_at'))->first());
+            //el segundo parámetro es la última fecha
+            $num_factura = substr($ultima_factura, 1); // nos quedamos con el número
+
+
             Factura::create($request->validated());
         } else {
             //editar
