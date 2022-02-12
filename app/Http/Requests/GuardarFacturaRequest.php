@@ -26,7 +26,8 @@ class GuardarFacturaRequest extends FormRequest
         return [
             'id_reserva' => [],
             'forma_pago' => [],
-            'fecha' => [],
+            'fecha' => ['required'],
+            'timestamp_pago' => [],
         ];
     }
 }

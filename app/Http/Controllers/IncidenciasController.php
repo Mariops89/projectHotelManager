@@ -29,7 +29,7 @@ class IncidenciasController extends Controller
 
     public function listarAJAX()
     {
-        return Incidencia::with('habitacion')->get();
+        return Incidencia::with('habitacion', 'personal')->get();
     }
 
 

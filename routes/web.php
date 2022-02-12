@@ -6,6 +6,7 @@ use App\Http\Controllers\FacturasController;
 use App\Http\Controllers\HabitacionesController;
 use App\Http\Controllers\IncidenciasController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MantenimientoController;
 use App\Http\Controllers\personalController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\ReservasController;
@@ -95,6 +96,8 @@ Route::post('/facturas/eliminar', [FacturasController::class, 'eliminar']);
 
 Route::get('/limpiezas', [LimpiezasController::class, 'listar'])->name('limpiezas');
 
-//Route::get('/incidencias', [IncidenciasController::class, 'listar'])->name('incidencias');
+Route::get('/mantenimiento', [MantenimientoController::class, 'listar'])->name('mantenimiento');
+Route::get('/mantenimiento/{id}', [MantenimientoController::class, 'incidencia'])->whereNumber('id');
+Route::post('/mantenimiento/atender', [MantenimientoController::class, 'atender'])->whereNumber('id');
 
 //Route::get('/incidencias', [IncidenciasController::class, 'listar'])->name('incidencias');

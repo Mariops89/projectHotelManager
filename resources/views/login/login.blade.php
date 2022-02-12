@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <div class="col-3">
+    <div class="col-lg-3 col-md-6">
         <div class="auth-box">
             <div id="loginform">
                 <div class="text-center pt-3 pb-3">

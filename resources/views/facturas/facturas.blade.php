@@ -45,7 +45,7 @@
                         <div class="col-3">
                             <div class="mb-3">
                                 <label for="factura-pago" class="form-label">Forma de pago</label>
-                                <select class="form-control" id="factura-pago" name="forma-pago">
+                                <select class="form-control" id="factura-pago" name="forma_pago">
                                     <option value="efectivo">Efectivo</option>
                                     <option value="tarjeta">Tarjeta de crédito</option>
                                     <option value="transferencia">Transferencia bancaria</option>

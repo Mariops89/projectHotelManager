@@ -37,17 +37,27 @@ class FacturasController
 
     public function guardar(GuardarFacturaRequest $request)
     {
-        $fecha = explode(' - ', $request->fecha);
-
 
         if (is_null($request->id)) {
             //crear
             $ultima_factura = (Factura::select('numero')->where('created_at', Factura::max('created_at'))->first());
             //el segundo parámetro es la última fecha
-            $num_factura = substr($ultima_factura, 1); // nos quedamos con el número
-
-
-            Factura::create($request->validated());
+            if ($ultima_factura != null) {
+                $num_factura = substr($ultima_factura, 1); // nos quedamos con el número en string
+                $num_factura = intval($num_factura);//en formato int
+                $num_nuevo = $num_factura + 1;
+                $nueva_factura = 'F' . $num_nuevo;
+                //create con el nuevo numero
+                $array = $request->validated();
+                $array ['numero'] = $nueva_factura;
+                Factura::create($array());
+            } else {
+                //create con F1
+                $array = $request->validated();
+                $array ['numero'] = 'F1';
+                //dd($array, $request->all(), $request->validated());
+                Factura::create($array);
+            }
         } else {
             //editar
             Factura::find($request->id)->update($request->validated());

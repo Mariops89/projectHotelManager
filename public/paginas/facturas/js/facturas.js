@@ -94,7 +94,7 @@ $(function () {
 
     }).on('click', '.detalles', function () {
         let tr = $(this).closest('tr');
-        let datos = table.row(tr).data();
+         let datos = table.row(tr).data();
         id_activo = datos.id;
         modal_facturas.find('.modal-title').html('Factura # ' + datos.id);
         $('#facturas-usuario').val(datos.usuario);

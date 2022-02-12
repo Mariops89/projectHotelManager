@@ -33,6 +33,11 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            $usuario = Auth::user();
+
+            if ($usuario->perfil === 'mantenimiento') {
+                return redirect()->route('mantenimiento');
+            }
 
             return redirect()->route('dashboard');
         }

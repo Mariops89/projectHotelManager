@@ -57,6 +57,15 @@ $(function () {
             },
             {data: 'descripcion', title: 'Descripción'},
             {data: 'fecha_notificacion', title: 'Fecha de notificación', render: renderDatetime},
+            {data: 'personal', title: 'Atendida',
+                render: function (data, type, row, meta) {
+                    if (data === null) {
+                        return '<span class="badge bg-warning fs-6">Sin atender</span>'
+                    } else {
+                        return data.nombre + ' ' + data.apellidos;
+                    }
+                }
+            },
             {data: 'fecha_resolucion', title: 'Fecha de resolución', render: renderDatetime},
             {data: 'habitacion.numero', title: 'Habitación'},
             {data: 'id', orderable: false, className: 'text-nowrap', width: '5px',
