@@ -24,6 +24,7 @@ class CreatePersonalTable extends Migration
             $table->string('provincia', 100)->nullable();
             $table->string('pais', 100)->nullable();
             $table->string('dni', 20)->unique()->nullable();
+            $table->string('tipo', 20);
             $table->timestamps();
         });
     }

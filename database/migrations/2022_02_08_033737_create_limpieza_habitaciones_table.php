@@ -17,7 +17,7 @@ class CreateLimpiezaHabitacionesTable extends Migration
             $table->id();
             $table->foreignId('id_personal')->constrained('personal');
             $table->foreignId('id_reserva')->constrained('reservas');
-            $table->timestamps('timestamp_limpieza');
+            $table->timestamp('timestamp_limpieza');
             $table->timestamps();
         }); //no migrada
     }

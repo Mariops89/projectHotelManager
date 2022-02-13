@@ -16,7 +16,7 @@ class CreateServiciosTable extends Migration
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 50);
-            $table->string('estado', 25);
+            $table->enum('estado', ['activo' , 'inactivo']);
             $table->integer('plazas');
             $table->float('precio');
             $table->timestamps();

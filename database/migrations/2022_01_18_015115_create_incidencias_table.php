@@ -17,12 +17,13 @@ class CreateIncidenciasTable extends Migration
             $table->id();
             $table->enum('Tipo' , ['urgente' , 'moderado' , 'no_urgente']);
             $table->text('descripcion');
-            $table->foreignId('id_personal')->constrained('personal');
-            $table->dateTime('fecha_notificacion');
+            $table->foreignId('id_personal')->nullable()->constrained('personal');
             $table->foreignId('id_habitacion')->constrained('habitaciones');
-            $table->dateTime('fecha_resolucion');
+            $table->dateTime('fecha_notificacion')->nullable();
+            $table->dateTime('fecha_resolucion')->nullable();
             $table->text('detalles');
-            $table->text('acciones');
+            $table->text('acciones')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -6,6 +6,7 @@ use App\Models\Login;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -26,6 +27,8 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        //dd(Hash::make('admin'));
+
         $credentials = $request->validate([
             'usuario' => ['required'],
             'password' => ['required'],
