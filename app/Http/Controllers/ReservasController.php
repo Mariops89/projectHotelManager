@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GuardarIncidenciaRequest;
+use App\Models\Factura;
 use App\Models\Habitacion;
 use App\Models\Reserva;
 use App\Services\PlantillaService;
@@ -69,5 +70,17 @@ class ReservasController
     public function eliminar(Request $request)
     {
         Reserva::destroy($request->id);
+    }
+
+    public function editarFactura(Request $request)
+    {
+        $numero_factura = (Factura::select('id')->where('id_reserva', $request->id));
+
+        if ($numero_factura == null) {
+            Factura::guardar();
+        } else {
+            // devolver a JS false
+        }
+
     }
 }

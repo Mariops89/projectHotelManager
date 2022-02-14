@@ -36,20 +36,6 @@ $(function () {
         modal_facturas.find('input').val(''); //cuando abres el modal estás vaciando los campoos idiota
         $('#factura-fecha-pago').data('daterangepicker').setStartDate(moment().format('DD/MM/YYYY'),
         $('#factura-fecha-pago').data('daterangepicker').setEndDate(moment().format('DD/MM/YYYY')))
-        //no era tan difícil
-        //además, lo único que tiene sentido es poner la fecha cuando abras el modal, porque si no, si la cambias
-        // luego no la volverías a tener otra vez, entiendes?
-        //si, lo veo, pero ser idiota por esto? es un decir
-        //lo sé, pero no te pases de palabrotas
-        //vaaaale
-        //pero ves que solo tiene sentido poner la fecha al darle al botón?
-        //por si la cambias?
-        //si, ya, como cargamos los plugins siempre al principio
-        //y que tendrá que ver
-        // tambien los inicializamos al principio
-        //pues esto igual
-        //bnueno, seguimos por whatsapp
-        //si
         modal_facturas_bs.show();
     });
 
@@ -92,16 +78,16 @@ $(function () {
 
         }
 
-    }).on('click', '.detalles', function () {
+   /* }).on('click', '.detalles', function () {
         let tr = $(this).closest('tr');
          let datos = table.row(tr).data();
         id_activo = datos.id;
-        modal_facturas.find('.modal-title').html('Factura # ' + datos.id);
-        $('#facturas-usuario').val(datos.usuario);
-        $('#facturas-password').val('');
-        $('#facturas-id_personal').val(datos.id_personal).trigger('change');
-        $('#facturas-perfil').val(datos.perfil).trigger('change');
-        modal_facturas_bs.show();
+        modal_detalles.find('.modal-title').html('Factura # ' + datos.id);
+        $('.numero-reserva').val(datos.usuario);
+        $('.habitacion-reserva').val('');
+        $('.numero-factura').val(datos.id_personal).trigger('change');
+        $('.fecha-factura').val(datos.perfil).trigger('change');
+        modal_detalles_bs.show();*/
 
     }).on('click', '.eliminar', function () {
         let tr = $(this).closest('tr');

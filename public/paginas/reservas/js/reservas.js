@@ -2,6 +2,8 @@ $(function () {
 
     const modal_detalles = $('#modal-detalles');
     const modal_detalles_bs = new bootstrap.Modal(modal_detalles[0], {backdrop: 'static'});
+    const modal_create_edit = $('#modal-create_edit');
+    const modal_create_edit_bs = new bootstrap.Modal(modal_create_edit[0], {backdrop: 'static'});
     const modal_eliminar = $('#modal-eliminar');
     const modal_eliminar_bs = new bootstrap.Modal(modal_eliminar[0], {backdrop: 'static'});
     let id_activo = null;
@@ -17,13 +19,18 @@ $(function () {
         minimumResultsForSearch: Infinity
     });
 
+    $('#factura-pago').select2({
+        width: '100%',
+        minimumResultsForSearch: Infinity
+    })
 
-    /*$('#nueva-reserva').on('click', function () {
+
+    $('#nueva-reserva').on('click', function () {
         id_activo = null;
         modal_habitaciones.find('.modal-title').html('Nueva habitación');
         modal_habitaciones.find('input').val('');
         modal_habitaciones_bs.show();
-    });*/
+    });
 
 
     let table = $('#tabla-reservas').DataTable({ // el id es la tabla
@@ -61,9 +68,13 @@ $(function () {
                         <button class="btn btn btn-outline-secondary btn-xs detalles">
                             <i class="fa fa-eye"></i>
                         </button>
+                        <button class="btn btn btn-outline-success btn-xs create_edit">
+                            <i class="fa fa-pencil"></i>
+                        </button>
                         <button class="btn btn btn-outline-danger btn-xs eliminar">
                             <i class="fa fa-trash"></i>
                         </button>`;
+
                 }
             },
         ],
@@ -163,6 +174,23 @@ $(function () {
 
             }
 
+            }).on('click', '.create_edit', function () {
+                let tr = $(this).closest('tr');
+                let datos = table.row(tr).data();
+                modal_create_edit.find('.modal-title').html('Crear / Editar factura')
+                $(' .numero-reserva').html(datos.id);
+                $(' .habitacion-reserva').html(datos.habitacion.numero);
+                // $(' .numero-factura').html(dateFormat(datos.fecha_entrada));
+                // $(' .fecha-factura').html(dateFormat(datos.fecha_salida));
+                // $(' .personas-reserva').html(datos.personas);
+                // $(' .precio-reserva').html(datos.precio + ' euros');
+                // $(' .late-checkout-reserva').html(datos.late_ckeckout);
+                // $('#datos-reserva .check-in-reserva').html(datos.timestamp_entrada);
+                // $('#datos-reserva .check-out-reserva').html(datos.timestamp_salida);
+
+                modal_create_edit_bs.show();
+            });
+
 
             }).on('click', '.eliminar', function () {
                 let tr = $(this).closest('tr');
@@ -188,6 +216,21 @@ $(function () {
                 })
             });
 
+        modal_create_edit.on('click', '.pagada', function() {
+            let datos_envio = {
+                id: id_activo //le pasamos el id a PHP
+            };
+
+            $.post(BASE_URL + 'reservas/editarfactura', datos_envio, function () {
+                //se ejecuta cuando recibe respuesta válida
+
+
+                //ocultar el modal
+                modal_create_edit_bs.hide();
+            })
+
 
         })
+
+
 

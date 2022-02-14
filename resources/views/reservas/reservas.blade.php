@@ -79,4 +79,48 @@
     </div>
 </div>
 </div>
-</div>
+</div> -->
+
+<div class="modal fade" id="modal-create_edit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div><label>Numero de reserva: </label> <span class="numero-reserva"></span></div>
+                        <div><label>Habitación: </label> <span class="habitacion-reserva"></span></div>
+                        <div><label>Factura: </label> <span class="numero-factura"></span></div>
+                        <div><label>Fecha de la factura: </label> <span class="fecha-factura"></span></div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="factura-pago" class="form-label">Forma de pago</label>
+                            <select class="form-control" id="factura-pago" name="forma_pago">
+                                <option value="efectivo">Efectivo</option>
+                                <option value="tarjeta">Tarjeta de crédito</option>
+                                <option value="transferencia">Transferencia bancaria</option>
+                                <option value="cheque">Cheque</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div id="pago-check">
+                        <label>
+                            <input type="checkbox" class=pagada" value="pagada">
+                            Pagada
+                        </label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between" id="detalles-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fa fa-times"></i> Cerrar
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
