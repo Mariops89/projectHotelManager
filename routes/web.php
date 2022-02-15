@@ -28,10 +28,8 @@ use App\Http\Controllers\LimpiezasController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('reservas');
 });
-Route::get('/dashboard', [DashboardController::class, 'mostrar'])->name('dashboard');
-
 
 Route::get('/clientes', [ClientesController::class, 'listar'])->name('clientes');
 Route::post('/clientes', [ClientesController::class, 'listarAJAX']);

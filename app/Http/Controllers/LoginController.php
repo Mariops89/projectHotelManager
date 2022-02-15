@@ -42,7 +42,7 @@ class LoginController extends Controller
                 return redirect()->route('mantenimiento');
             }
 
-            return redirect()->route('dashboard');
+            return redirect('/');
         }
 
         return back()->withErrors([

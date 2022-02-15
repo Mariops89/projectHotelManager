@@ -5,6 +5,7 @@ namespace App\Services;
 class PlantillaService
 {
     private $title = null;
+    private $icon = null;
     private $ficheros_css = array();
     private $ficheros_js = array();
     private $data;
@@ -19,6 +20,10 @@ class PlantillaService
 
     function setTitle($title): void {
         $this->title = $title;
+    }
+
+    function setIcon($icon): void {
+        $this->icon = $icon;
     }
 
     function setCss($fichero_css): void {

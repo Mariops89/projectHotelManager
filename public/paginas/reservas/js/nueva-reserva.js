@@ -4,6 +4,8 @@ $(function () {
     let card_cliente = $('#card-cliente');
     const modal_confirmacion = $('#modal-confirmacion');
     const modal_modal_confirmacion_bs = new bootstrap.Modal(modal_confirmacion[0], {backdrop: 'static'});
+    const modal_clientes = $('#modal-clientes');
+    const modal_clientes_bs = new bootstrap.Modal(modal_clientes[0], {backdrop: 'static'});
 
     let id_cliente;
     let habitacion_activa;
@@ -117,6 +119,34 @@ $(function () {
         $.post(BASE_URL + 'reservas/confirmar', datos_form, function () {
             modal_modal_confirmacion_bs.show();
         });
+    });
+
+
+    $('#nuevo-cliente').on('click', function () {
+        modal_clientes.find('.modal-title').html('Nuevo cliente');
+        modal_clientes.find('input').val('');
+        modal_clientes_bs.show();
+    });
+
+
+    modal_clientes.on('hidden.bs.modal', function () {
+        limpiarErrores(modal_clientes);
+    }).on('click', '.aceptar', function () {
+        //cogemos los datos del formulario en JSON
+        let datos_form = serializeArrayJson('#form-clientes');
+
+        //enviar los datos al servidor mediante POST (usando AJAX)
+        $.post(BASE_URL + 'clientes/guardar', datos_form, function () {
+            //se ejecuta cuando recibe respuesta válida
+            $('#reserva-cliente-dni').val(datos_form.dni);
+            $('#buscar-cliente').click();
+
+            //ocultar el modal
+            modal_clientes_bs.hide();
+
+        }).fail(function(error) {
+            mostrarErrores(error, modal_clientes);
+        })
     });
 
 })
