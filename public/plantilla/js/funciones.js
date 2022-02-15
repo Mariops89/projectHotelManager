@@ -54,6 +54,11 @@ function renderDatetime(data, type, row, meta) {
     return data;
 }
 
+
+function render2Decimales(data, type, row, meta) {
+    return parseFloat(data).toFixed(2);
+}
+
 function  dateFormat(date){
     return moment(date).format('DD/MM/YYYY');
 }

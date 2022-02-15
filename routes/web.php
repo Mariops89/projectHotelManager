@@ -83,7 +83,6 @@ Route::post('/reservas/eliminar', [ReservasController::class, 'eliminar']);
 Route::post('/reservas/guardar', [ReservasController::class, 'guardar']);
 Route::post('/reservas/guardarcheckin' , [ReservasController::class, 'guardarCheckin']);
 Route::post('/reservas/guardarcheckout' , [ReservasController::class, 'guardarCheckout']);
-Route::post('/reservas/editarfactura' , [ReservasController::class, 'editarFactura']);
 
 Route::get('/facturas', [FacturasController::class, 'listar'])->name('facturas');
 Route::post('/facturas', [FacturasController::class, 'listarAJAX']);

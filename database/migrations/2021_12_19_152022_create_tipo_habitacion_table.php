@@ -16,8 +16,8 @@ class CreateTipoHabitacionTable extends Migration
         Schema::create('tipo_habitacion', function (Blueprint $table) {
             $table->id();
             $table->string('tipo', 50)->nullable();
-            $table->integer('precio_alta')->nullable();
-            $table->integer('precio_baja')->nullable();
+            $table->double('precio_alta')->nullable();
+            $table->double('precio_baja')->nullable();
             $table->timestamps();
         });
     }

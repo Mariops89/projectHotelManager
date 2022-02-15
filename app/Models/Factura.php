@@ -18,4 +18,10 @@ class Factura extends Model
     {
         return $this->belongsTo(Reserva::class, 'id_reserva');
     }
+
+
+    public function lineas()
+    {
+        return $this->hasMany(FacturaLinea::class, 'id_factura');
+    }
 }

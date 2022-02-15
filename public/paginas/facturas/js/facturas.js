@@ -1,43 +1,17 @@
 $(function () {
 
-    const modal_facturas = $('#modal-facturas');
-    const modal_facturas_bs = new bootstrap.Modal(modal_facturas[0], {backdrop: 'static'});
+    const modal_factura = $('#modal-factura');
+    const modal_factura_bs = new bootstrap.Modal(modal_factura[0], {backdrop: 'static'});
     const modal_eliminar = $('#modal-eliminar');
     const modal_eliminar_bs = new bootstrap.Modal(modal_eliminar[0], {backdrop: 'static'});
     let id_activo = null;
 
 
-   $('#factura-fecha-pago').daterangepicker({
-       singleDatePicker: true,
-       autoApply: true,
-       locale: bootstrap_daterangepicker_locale,
-       startDate:  moment().format('DD/MM/YYYY'),
-       endDate: moment().format('DD/MM/YYYY'),
-   })
-
-
     $('#factura-pago').select2({
         width: '100%',
-        placeholder: 'Seleccione un método de pago',
-        allowClear: false, //para poder deseleccionar
-        minimumResultsForSearch: Infinity,
-    });
+        minimumResultsForSearch: Infinity
+    })
 
-    $('#factura-numero-reserva').select2({
-        width: '100%',
-        placeholder: 'Seleccione una reserva',
-        allowClear: true //para poder deseleccionar
-    });
-
-
-    $('#nueva-factura').on('click', function () {
-        id_activo = null;
-        modal_facturas.find('.modal-title').html('Nueva factura');
-        modal_facturas.find('input').val(''); //cuando abres el modal estás vaciando los campoos idiota
-        $('#factura-fecha-pago').data('daterangepicker').setStartDate(moment().format('DD/MM/YYYY'),
-        $('#factura-fecha-pago').data('daterangepicker').setEndDate(moment().format('DD/MM/YYYY')))
-        modal_facturas_bs.show();
-    });
 
 
     let table = $('#tabla-facturas').DataTable({ // el id es la tabla
@@ -47,11 +21,30 @@ $(function () {
             dataSrc: '',
         },
         columns: [
-            {data: 'id', title: 'Factura'},
+            {data: 'numero', title: 'Factura'},
             {data: 'id_reserva', title: 'Reserva'},
+            {data: 'reserva.cliente', title: 'Cliente', className: 'text-nowrap',
+                render: function (data, type, row, meta) {
+                    return data.dni + ' - ' + data.nombre + ' ' + data.apellidos
+                }
+            },
             {data: 'fecha', title: 'Fecha factura', render: renderDate},
+            {data: 'subtotal', title: 'Subtotal', render: render2Decimales},
+            {data: 'iva', title: 'IVA', render: render2Decimales},
+            {data: 'total', title: 'Total', render: render2Decimales},
             {data: 'forma_pago', title: 'Forma de pago'},
-            {data: 'timestamp_pago', title: 'Fecha de pago'},
+            {data: 'timestamp_pago', title: 'Fecha de pago',
+                render: function (data, type, row, meta) {
+                    if (data === null) {
+                        return '<span class="badge bg-danger fs-6">Pendiente de pago</span>'
+                    } else {
+                        if (type !== 'sort') {
+                            data = moment(data).format('DD/MM/YYYY HH:mm:ss');
+                        }
+                        return data;
+                    }
+                }
+            },
 
             {
                 data: 'id',
@@ -60,8 +53,8 @@ $(function () {
                 width: '5px',
                 render: function (data, type, row, meta) {
                     return `
-                    <button class="btn btn btn-outline-secondary btn-xs detalles">
-                        <i class="fa fa-eye"></i>
+                    <button class="btn btn btn-outline-secondary btn-xs editar">
+                        <i class="fa fa-pencil-alt"></i>
                     </button>
                     <button class="btn btn btn-outline-danger btn-xs eliminar">
                         <i class="fa fa-trash"></i>
@@ -78,52 +71,68 @@ $(function () {
 
         }
 
-   /* }).on('click', '.detalles', function () {
+    }).on('click', '.editar', function () {
         let tr = $(this).closest('tr');
-         let datos = table.row(tr).data();
+        let datos = table.row(tr).data();
         id_activo = datos.id;
-        modal_detalles.find('.modal-title').html('Factura # ' + datos.id);
-        $('.numero-reserva').val(datos.usuario);
-        $('.habitacion-reserva').val('');
-        $('.numero-factura').val(datos.id_personal).trigger('change');
-        $('.fecha-factura').val(datos.perfil).trigger('change');
-        modal_detalles_bs.show();*/
+
+        modal_factura.find('.modal-title').html('Editar factura');
+        $('#modal-factura .numero-factura').html(datos.numero);
+        $('#modal-factura .numero-reserva').html(datos.reserva.id);
+        $('#modal-factura .fecha-factura').html(renderDate(datos.fecha));
+        $('#modal-factura .habitacion-reserva').html(datos.reserva.habitacion.numero);
+        $('#modal-factura .cliente').html(datos.reserva.cliente.dni + ' - ' + datos.reserva.cliente.nombre + ' ' + datos.reserva.cliente.apellidos);
+        if (datos.timestamp_pago === null) {
+            $('#modal-factura .pagada').prop('checked', false);
+            $('#modal-factura #factura-pago').parent().hide();
+        } else {
+            $('#modal-factura .pagada').prop('checked', true);
+            $('#modal-factura #factura-pago').parent().show();
+            $('#modal-factura #factura-pago').val(datos.forma_pago).trigger('change');
+        }
+
+        let lineas = '';
+        $.each(datos.lineas, function (k, linea) {
+            lineas += `<tr>
+                    <td>${linea.concepto}</td>
+                    <td>${linea.cantidad}</td>
+                    <td>${parseFloat(linea.precio).toFixed(2)}</td>
+                    <td>${parseFloat(linea.base_imponible).toFixed(2)}</td>
+                    <td>${parseFloat(linea.iva).toFixed(2)}</td>
+                    <td>${parseFloat(linea.subtotal).toFixed(2)}</td>
+                </tr>`;
+        });
+        $('#tabla-lineas tbody').html(lineas);
+        $('#tabla-lineas .subtotal').html(parseFloat(datos.subtotal).toFixed(2));
+        $('#tabla-lineas .iva').html(parseFloat(datos.iva).toFixed(2));
+        $('#tabla-lineas .total').html(parseFloat(datos.total).toFixed(2));
+
+
+        modal_factura_bs.show();
 
     }).on('click', '.eliminar', function () {
         let tr = $(this).closest('tr');
         let datos = table.row(tr).data();
         id_activo = datos.id;
-        modal_eliminar.find('.modal-title-text').html('Eliminar usuario');
-        modal_eliminar.find('.mensaje').html(`¿Está seguro de que quiere eliminar el usuario <i class="text-nowrap">${datos.usuario}</i>?`);
+        modal_eliminar.find('.modal-title-text').html('Eliminar factura');
+        modal_eliminar.find('.mensaje').html(`¿Está seguro de que quiere eliminar la factura <i class="text-nowrap">${datos.numero}</i>?`);
         modal_eliminar_bs.show();
     });
 
 
-    // modal_facturas.find('.aceptar').on('click', function () {
-    //
-    // })
-
-    modal_facturas.on('hidden.bs.modal', function () {
-        limpiarErrores(modal_facturas);
-    }).on('click', '.aceptar', function () {
-        let tr = $(this).closest('tr');
-        let datos = table.row(tr).data();
-        console.log(datos);
-        //cogemos los datos del formulario en JSON
-        let datos_form = serializeArrayJson('#form-facturas');
-        datos_form.id = id_activo
-        console.log(id_activo);
-
-        //enviar los datos al servidor mediante POST (usando AJAX)
+    modal_factura.on('change', '.pagada', function () {
+        if ($(this).is(':checked')) {
+            $('#factura-pago').parent().show();
+        } else {
+            $('#factura-pago').parent().hide();
+        }
+    }).on('click', '.aceptar', function() {
+        let datos_form = serializeArrayJson('#form-factura');
+        datos_form.id = id_activo;
         $.post(BASE_URL + 'facturas/guardar', datos_form, function () {
             //se ejecuta cuando recibe respuesta válida
-
-            //recargar el datatables
             table.ajax.reload();
-            //ocultar el modal
-            modal_facturas_bs.hide();
-        }).fail(function (error) {
-            mostrarErrores(error, modal_facturas);
+            modal_factura_bs.hide();
         })
     });
 

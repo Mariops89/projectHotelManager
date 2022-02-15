@@ -15,11 +15,13 @@ class CreateLineasfacturasTable extends Migration
     {
         Schema::create('lineasfacturas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_factura')->constrained('facturas');
+            $table->foreignId('id_factura')->constrained('facturas')->cascadeOnDelete();
             $table->string('concepto', 500);
             $table->integer('cantidad');
-            $table->integer('precio');
-            $table->float('iva');
+            $table->double('precio');
+            $table->double('base_imponible');
+            $table->double('iva');
+            $table->double('subtotal');
             $table->timestamps();
         }); // no migrada
     }

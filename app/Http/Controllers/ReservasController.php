@@ -15,22 +15,32 @@ class ReservasController
     public function listar(PlantillaService $plantilla)
     {
         $habitaciones = Habitacion::all();
+        $facturas = Factura::all();
 
         $plantilla->setTitle('Historial de reservas');
         $plantilla->setBreadcrumb(array('Reservas'));
         $plantilla->loadDatatables();
         $plantilla->loadSelect2();
+        $plantilla->setCss('paginas/facturas/css/facturas.css'); //esto es el js, no la vista
         $plantilla->setJs('paginas/reservas/js/reservas.js'); //esto es el js, no la vista
 
         return $plantilla->load('reservas/reservas',
-            ['habitaciones' => $habitaciones]);
+            ['habitaciones' => $habitaciones , 'facturas' => $facturas]);
              //cargo la vista y creo el array
     }
 
 
     public function listarAJAX()
     {
-        return Reserva::with(['habitacion', 'cliente'])->get();
+        return Reserva::with(['habitacion', 'cliente', 'factura', 'factura.lineas'])
+            ->get()
+            ->each(function ($reserva) {
+                if (!is_null($reserva->factura)) {
+                    $reserva->factura->subtotal = $reserva->factura->lineas->sum('base_imponible');
+                    $reserva->factura->iva = $reserva->factura->lineas->sum('iva');
+                    $reserva->factura->total = $reserva->factura->lineas->sum('subtotal');
+                }
+            });
     }
 
 
@@ -70,17 +80,5 @@ class ReservasController
     public function eliminar(Request $request)
     {
         Reserva::destroy($request->id);
-    }
-
-    public function editarFactura(Request $request)
-    {
-        $numero_factura = (Factura::select('id')->where('id_reserva', $request->id));
-
-        if ($numero_factura == null) {
-            Factura::guardar();
-        } else {
-            // devolver a JS false
-        }
-
     }
 }
