@@ -10,38 +10,40 @@
                         <span class="hide-menu">Clientes</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                        <i class="fas fa-bed"></i>
-                        <span class="hide-menu">Habitaciones</span>
-                    </a>
-                    <ul aria-expanded="false" class="collapse first-level">
-                        <li class="sidebar-item">
-                            <a href="{{route('tipo_habitaciones')}}" class="sidebar-link">
-                                <i class="far fa-circle"></i>
-                                <span class="hide-menu">Tipos de habitaciones</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{route('habitaciones')}}" class="sidebar-link">
-                                <i class="far fa-circle"></i>
-                                <span class="hide-menu">Listado de habitaciones</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('personal')}}" aria-expanded="false">
-                        <i class="fas fa-tools"></i>
-                        <span class="hide-menu">Personal</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('usuarios')}}" aria-expanded="false">
-                        <i class="fas fa-users"></i>
-                        <span class="hide-menu">Usuarios</span>
-                    </a>
-                </li>
+                @if ($usuario->perfil === 'administrador')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <i class="fas fa-bed"></i>
+                            <span class="hide-menu">Habitaciones</span>
+                        </a>
+                        <ul aria-expanded="false" class="collapse first-level">
+                            <li class="sidebar-item">
+                                <a href="{{route('tipo_habitaciones')}}" class="sidebar-link">
+                                    <i class="far fa-circle"></i>
+                                    <span class="hide-menu">Tipos de habitaciones</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{{route('habitaciones')}}" class="sidebar-link">
+                                    <i class="far fa-circle"></i>
+                                    <span class="hide-menu">Listado de habitaciones</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('personal')}}" aria-expanded="false">
+                            <i class="fas fa-tools"></i>
+                            <span class="hide-menu">Personal</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('usuarios')}}" aria-expanded="false">
+                            <i class="fas fa-users"></i>
+                            <span class="hide-menu">Usuarios</span>
+                        </a>
+                    </li>
+                @endif
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('incidencias')}}" aria-expanded="false">
                         <i class="fas fa-exclamation-triangle"></i>

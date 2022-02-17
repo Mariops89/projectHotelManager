@@ -1,7 +1,8 @@
+@include('plantilla.header-movil')
 <h1 class="text-center my-3">Lista de incidencias</h1>
 @foreach($data['incidencias'] as $incidencia)
     <div class="card" id="{{$incidencia->id}}">
-        <div class="card-body bg-secondary p-2 border-5"">
+        <div class="card-body bg-secondary p-2 border-5">
             <div class="row">
                 <div class="col d-flex flex-column">
                     <div class="fs-3">Habitación {{$incidencia->habitacion->numero}}</div>

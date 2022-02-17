@@ -2,10 +2,13 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Auth;
+
 class PlantillaService
 {
     private $title = null;
     private $icon = null;
+    private $usuario = null;
     private $ficheros_css = array();
     private $ficheros_js = array();
     private $data;
@@ -63,6 +66,7 @@ class PlantillaService
     public function load($vista, $data = array()) {
         $this->vista = $vista;
         $this->data = $data;
+        $this->usuario = Auth::user();
         return view('plantilla/plantilla', get_object_vars($this));
     }
 

@@ -1,3 +1,4 @@
+@include('plantilla.header-movil')
 <h1 class="text-center my-3">Incidencia {{$data->id}}</h1>
 
 <div class="card mb-4">

@@ -15,7 +15,7 @@ class Acceso
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $perfil_requerido = null)
     {
         $usuario = Auth::user();
 
@@ -23,11 +23,20 @@ class Acceso
             if (!is_null($usuario)) {
                 return back();
             }
+            return $next($request);
+
         } else {
             if (is_null($usuario)) {
                 return redirect('login');
             }
         }
+
+        if ($usuario->perfil !== 'administrador') {
+            if ($perfil_requerido == 'administrador' || $perfil_requerido !== $usuario->perfil) {
+                return back();
+            }
+        }
+
 
         return $next($request);
     }
