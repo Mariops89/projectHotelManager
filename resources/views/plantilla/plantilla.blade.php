@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{is_null($title) ? 'Hotel Manager' : "$title | Hotel Manager"}}</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url('img/logo_hotelmanager.png')}}">
     <!-- Custom CSS -->
     <link href="{{url('plantilla/dist/css/style.min.css')}}" rel="stylesheet">
+    <link href="{{url('plugins/fontawesome-free-5.15.4-web/css/all.min.css')}}" rel="stylesheet">
     <!--This page CSS -->
     @foreach($ficheros_css as $fichero)
         <link href="{{url($fichero)}}" rel="stylesheet">
@@ -55,7 +56,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">@if (!is_null($icon)) <i class="{{$icon}}"></i> @endif{{$title}}</h4>
+                        <h4 class="page-title">@if (!is_null($icon)) <i class="{{$icon}} fa-lg"></i> @endif{{$title}}</h4>
                         <div class="ms-auto text-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">

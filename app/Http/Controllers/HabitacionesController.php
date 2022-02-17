@@ -16,6 +16,7 @@ class HabitacionesController extends Controller
         $tipos = TipoHabitacion::all();
 
         $plantilla->setTitle('Habitaciones');
+        $plantilla->setIcon('fas fa-bed');
         $plantilla->setBreadcrumb(array('Habitaciones'));
         $plantilla->loadDatatables();
         $plantilla->loadSelect2();

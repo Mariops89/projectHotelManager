@@ -13,6 +13,7 @@ class PersonalController extends Controller
     public function listar(PlantillaService $plantilla)
     {
         $plantilla->setTitle('Personal');
+        $plantilla->setIcon('fas fa-tools');
         $plantilla->setBreadcrumb(array('Personal'));
         $plantilla->loadDatatables();
         $plantilla->setJs('paginas/personal/js/personal.js'); //esto es el js, no la vista

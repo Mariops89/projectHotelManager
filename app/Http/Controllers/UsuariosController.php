@@ -16,7 +16,8 @@ class UsuariosController extends Controller
     {
 
         $personas = Personal::all();
-        $plantilla->setTitle('Usuario');
+        $plantilla->setTitle('Usuarios');
+        $plantilla->setIcon('fas fa-users');
         $plantilla->setBreadcrumb(array('usuarios'));
         $plantilla->loadDatatables();
         $plantilla->loadSelect2();

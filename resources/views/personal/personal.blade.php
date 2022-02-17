@@ -1,4 +1,3 @@
-<h1>Esto será Personal</h1>
 <div class="row">
     <div class="col">
         <div class="card">

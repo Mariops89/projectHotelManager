@@ -61,7 +61,7 @@ $(function () {
         $('#cliente-telefono').val(datos.telefono);
         $('#cliente-direccion').val(datos.direccion);
         $('#cliente-localidad').val(datos.localidad);
-        $('#cliente-cod_postal').val(datos.cod_postal);
+        $('#cliente-cod-postal').val(datos.cod_postal);
         $('#cliente-provincia').val(datos.provincia);
         $('#cliente-pais').val(datos.pais);
         modal_clientes_bs.show();

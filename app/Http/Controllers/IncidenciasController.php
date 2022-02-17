@@ -18,6 +18,7 @@ class IncidenciasController extends Controller
         $habitaciones = Habitacion::all();
 
         $plantilla->setTitle('Incidencias');
+        $plantilla->setIcon('fas fa-exclamation-triangle');
         $plantilla->setBreadcrumb(array('Incidencias'));
         $plantilla->loadDatatables();
         $plantilla->loadSelect2();

@@ -15,6 +15,7 @@ class FacturasController
     public function listar(PlantillaService $plantilla)
     {
         $plantilla->setTitle('Historial de facturas');
+        $plantilla->setIcon('fas fa-file-alt');
         $plantilla->setBreadcrumb(array('Facturas'));
         $plantilla->loadDatatables();
         $plantilla->loadDaterangepicker();

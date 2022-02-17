@@ -18,6 +18,7 @@ class ReservasController
         $facturas = Factura::all();
 
         $plantilla->setTitle('Historial de reservas');
+        $plantilla->setIcon('fas fa-calendar');
         $plantilla->setBreadcrumb(array('Reservas'));
         $plantilla->loadDatatables();
         $plantilla->loadSelect2();

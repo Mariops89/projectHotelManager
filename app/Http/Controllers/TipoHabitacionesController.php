@@ -12,7 +12,8 @@ class TipoHabitacionesController extends Controller
 
     public function listar(PlantillaService $plantilla)
     {
-        $plantilla->setTitle('Tipo de habitaciones');
+        $plantilla->setTitle('Tipos de habitaciones');
+        $plantilla->setIcon('fas fa-bed');
         $plantilla->setBreadcrumb(array('Tipos de habitaciones'));
         $plantilla->loadDatatables();
         $plantilla->setJs('paginas/habitaciones/js/tipo_habitacion.js'); //esto es el js, no la vista

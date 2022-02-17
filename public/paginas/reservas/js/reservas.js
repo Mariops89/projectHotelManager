@@ -65,7 +65,7 @@ $(function () {
                             <i class="fa fa-eye"></i>
                         </button>
                         <button class="btn btn btn-outline-secondary btn-xs factura">
-                            <i class="fa fa-file"></i>
+                            <i class="fa fa-file-alt"></i>
                         </button>
                         <button class="btn btn btn-outline-danger btn-xs eliminar">
                             <i class="fa fa-trash"></i>
