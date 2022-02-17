@@ -7,6 +7,18 @@ $(function () {
     let id_activo = null;
 
 
+    $('#fechas').daterangepicker({
+        locale: bootstrap_daterangepicker_locale,
+        ranges: bootstrap_daterangepicker_ranges,
+        startDate: moment().startOf('month'),
+        endDate: moment().endOf('month')
+        // alwaysShowCalendars: true
+
+    }).on('apply.daterangepicker', function(ev, picker) {
+        table.ajax.reload();
+    });
+
+
     $('#factura-pago').select2({
         width: '100%',
         minimumResultsForSearch: Infinity
@@ -19,6 +31,11 @@ $(function () {
             type: 'post',
             url: BASE_URL + 'facturas',
             dataSrc: '',
+            data: function (d) {
+                let drp = $('#fechas').data('daterangepicker');
+                d.inicio = drp.startDate.format('YYYY-MM-DD');
+                d.fin = drp.endDate.format('YYYY-MM-DD');
+            }
         },
         columns: [
             {data: 'numero', title: 'Factura'},
@@ -65,7 +82,7 @@ $(function () {
         language: datatables_locale,
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
         pageLength: 10,
-        order: [[1, 'asc'], [2, 'asc']],
+        order: [0, 'asc'],
         scrollX: true,
         drawCallback: function (settings) {
 

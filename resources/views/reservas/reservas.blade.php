@@ -3,6 +3,12 @@
         <div class="card">
             <div class="card-body">
                 <div class="row mb-3">
+                    <div class="col-auto">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                            <input type="text" class="form-control" id="fechas">
+                        </div>
+                    </div>
                     <div class="col text-end">
                         <a href="{{route('nueva-reserva')}}" class="btn btn-success">
                             <i class="fa fa-plus"></i> Nueva reserva

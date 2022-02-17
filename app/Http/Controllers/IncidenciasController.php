@@ -22,15 +22,16 @@ class IncidenciasController extends Controller
         $plantilla->setBreadcrumb(array('Incidencias'));
         $plantilla->loadDatatables();
         $plantilla->loadSelect2();
+        $plantilla->loadDaterangepicker();
         $plantilla->setJs('paginas/incidencias/js/incidencias.js'); //esto es el js, no la vista
 
         return $plantilla->load('incidencias/incidencias', ['habitaciones' => $habitaciones]); //cargo la vista y creo el array
     }
 
 
-    public function listarAJAX()
+    public function listarAJAX(Request $request)
     {
-        return Incidencia::with('habitacion', 'personal')->get();
+        return Incidencia::with('habitacion', 'personal')->whereBetween('fecha_notificacion', [$request->inicio, $request->fin])->get();
     }
 
 

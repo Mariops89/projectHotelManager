@@ -10,6 +10,18 @@ $(function () {
     let id_factura_activo = null;
 
 
+    $('#fechas').daterangepicker({
+        locale: bootstrap_daterangepicker_locale,
+        ranges: bootstrap_daterangepicker_ranges,
+        startDate: moment().startOf('month'),
+        endDate: moment().endOf('month')
+        // alwaysShowCalendars: true
+
+    }).on('apply.daterangepicker', function(ev, picker) {
+        table.ajax.reload();
+    });
+
+
     $('#factura-pago').select2({
         width: '100%',
         minimumResultsForSearch: Infinity
@@ -21,6 +33,11 @@ $(function () {
             type: 'post',
             url: BASE_URL + 'reservas',
             dataSrc: '',
+            data: function (d) {
+                let drp = $('#fechas').data('daterangepicker');
+                d.inicio = drp.startDate.format('YYYY-MM-DD');
+                d.fin = drp.endDate.format('YYYY-MM-DD');
+            }
         },
         columns: [
             {data: 'id', title: 'Número de reserva'},

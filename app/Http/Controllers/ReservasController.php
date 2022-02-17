@@ -22,6 +22,7 @@ class ReservasController
         $plantilla->setBreadcrumb(array('Reservas'));
         $plantilla->loadDatatables();
         $plantilla->loadSelect2();
+        $plantilla->loadDaterangepicker();
         $plantilla->setCss('paginas/facturas/css/facturas.css'); //esto es el js, no la vista
         $plantilla->setJs('paginas/reservas/js/reservas.js'); //esto es el js, no la vista
 
@@ -31,9 +32,10 @@ class ReservasController
     }
 
 
-    public function listarAJAX()
+    public function listarAJAX(Request $request)
     {
         return Reserva::with(['habitacion', 'cliente', 'factura', 'factura.lineas'])
+            ->intervalo($request->inicio, $request->fin)
             ->get()
             ->each(function ($reserva) {
                 if (!is_null($reserva->factura)) {

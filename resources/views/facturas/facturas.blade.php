@@ -2,6 +2,14 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-auto">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                            <input type="text" class="form-control" id="fechas">
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col">
                         <table class="table table-striped table-bordered w-100" id="tabla-facturas"></table>

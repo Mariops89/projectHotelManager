@@ -27,9 +27,10 @@ class FacturasController
         //cargo la vista y creo el array
     }
 
-    public function listarAJAX()
+    public function listarAJAX(Request $request)
     {
         return Factura::with(['reserva', 'reserva.habitacion', 'reserva.cliente', 'lineas'])
+            ->whereBetween('fecha', [$request->inicio, $request->fin])
             ->get()
             ->each(function ($factura) {
                 $factura->subtotal = $factura->lineas->sum('base_imponible');

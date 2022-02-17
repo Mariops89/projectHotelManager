@@ -7,6 +7,18 @@ $(function () {
     let id_activo = null;
     let numero = null;
 
+
+    $('#fechas').daterangepicker({
+        locale: bootstrap_daterangepicker_locale,
+        ranges: bootstrap_daterangepicker_ranges,
+        startDate: moment().startOf('month'),
+        endDate: moment().endOf('month')
+        // alwaysShowCalendars: true
+
+    }).on('apply.daterangepicker', function(ev, picker) {
+        table.ajax.reload();
+    });
+
     $('#incidencia-habitacion').select2({
         width: '100%',
         placeholder:'Seleccione la habitación',
@@ -32,6 +44,11 @@ $(function () {
             type: 'post',
             url: BASE_URL + 'incidencias',
             dataSrc: '',
+            data: function (d) {
+                let drp = $('#fechas').data('daterangepicker');
+                d.inicio = drp.startDate.format('YYYY-MM-DD 00:00:00');
+                d.fin = drp.endDate.format('YYYY-MM-DD 23:59:59');
+            }
         },
         columns: [
             {
