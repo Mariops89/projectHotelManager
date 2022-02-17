@@ -60,9 +60,15 @@ function render2Decimales(data, type, row, meta) {
 }
 
 function  dateFormat(date){
-    return moment(date).format('DD/MM/YYYY');
+    if (date !== null) {
+        date = moment(date).format('DD/MM/YYYY');
+    }
+    return date;
 }
 
-function  dateTimeFormat(date){
-    return moment(date).format('DD/MM/YYYY HH:mm:ss');
+function  dateTimeFormat(date) {
+    if (date !== null) {
+        date = moment(date).format('DD/MM/YYYY HH:mm:ss');
+    }
+    return date;
 }

@@ -55,6 +55,7 @@ $(function () {
                     }
                 },
             },
+            {data: 'habitacion.numero', title: 'Habitación'},
             {data: 'descripcion', title: 'Descripción'},
             {data: 'fecha_notificacion', title: 'Fecha de notificación', render: renderDatetime},
             {data: 'personal', title: 'Atendida',
@@ -67,7 +68,6 @@ $(function () {
                 }
             },
             {data: 'fecha_resolucion', title: 'Fecha de resolución', render: renderDatetime},
-            {data: 'habitacion.numero', title: 'Habitación'},
             {data: 'id', orderable: false, className: 'text-nowrap', width: '5px',
                 render: function (data, type, row, meta) {
                     return `
@@ -82,7 +82,7 @@ $(function () {
         language: datatables_locale,
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
         pageLength: 10,
-        order: [[2, 'asc']],
+        order: [[3, 'asc']],
         scrollX: true,
         drawCallback: function(settings) {
 
@@ -92,7 +92,7 @@ $(function () {
         let tr = $(this).closest('tr'); // apunta a la fila a la que pertenece el botón que pulses
         let datos = table.row(tr).data();
         id_activo = datos.id;
-        modal_incidencias.find('.modal-title').html('Editar servicio');
+        modal_incidencias.find('.modal-title').html('Editar incidencia');
         $('#incidencia-tipo').val(datos.Tipo).trigger('change'); //lo mete en el formulario
         $('#incidencia-descripcion').val(datos.descripcion);
         //$('#incidencia-id_personal').val(datos.id_personal.toLowerCase()).trigger('change');
@@ -108,8 +108,8 @@ $(function () {
         let tr = $(this).closest('tr');
         let datos = table.row(tr).data();
         id_activo = datos.id;
-        modal_eliminar.find('.modal-title-text').html('Eliminar incidente');
-        modal_eliminar.find('.mensaje').html(`¿Está seguro de que quiere eliminar el incidente <i class="text-nowrap">${datos.nombre} </i>?`);
+        modal_eliminar.find('.modal-title-text').html('Eliminar incidencia');
+        modal_eliminar.find('.mensaje').html(`¿Está seguro de que quiere eliminar la incidencia de la habitación <i class="text-nowrap">${datos.habitacion.numero}</i>: <i class="text-nowrap">${datos.descripcion}</i>?`);
         modal_eliminar_bs.show();
     });
 

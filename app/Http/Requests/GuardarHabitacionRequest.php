@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Cliente;
+use App\Models\Habitacion;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class GuardarHabitacionRequest extends FormRequest
 {
@@ -24,12 +27,21 @@ class GuardarHabitacionRequest extends FormRequest
     public function rules()
     {
         return [
-            'numero' => ['required', 'numeric', 'min:1'],
+            'numero' => ['required', 'numeric', 'min:1', Rule::unique(Habitacion::class, 'numero')->ignore($this->id)],
             'id_tipo_habitacion' => ['required'],
             'personas' => ['required', 'numeric', 'min:1'],
             'estado' => ['required'],
         ];
     }
+
+
+    public function attributes()
+    {
+        return [
+            'numero' => 'número'
+        ];
+    }
+
 
     public function messages()
     {

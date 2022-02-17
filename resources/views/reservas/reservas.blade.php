@@ -71,10 +71,10 @@
                 </button>
                 <div>
                     <button type="button" class="btn btn-success mx-auto check-in-button">
-                        <i class="fa fa-check"></i> Checkin
+                        <i class="fas fa-sign-in-alt"></i> Registrar check-in
                     </button>
-                    <button type="button" class="btn btn-success check-out-button">
-                        <i class="fa fa-check"></i> Checkout
+                    <button type="button" class="btn btn-danger check-out-button">
+                        <i class="fas fa-sign-out-alt"></i> Registrar check-out
                     </button>
                 </div>
             </div>

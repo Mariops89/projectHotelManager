@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Personal;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class GuardarPersonalRequest extends FormRequest
@@ -16,6 +17,13 @@ class GuardarPersonalRequest extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'dni' => Str::upper($this->dni),
+        ]);
     }
 
     /**

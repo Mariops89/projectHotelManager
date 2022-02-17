@@ -46,11 +46,11 @@
                         </div>
                         <div class="col">
                             <div class="mb-3">
-                                <label for="usuarios-id_personal" class="form-label">Personal</label>
+                                <label for="usuarios-id_personal" class="form-label">Empleado asociado</label>
                                 <select class="form-control" id="usuarios-id_personal" name="id_personal">
                                     <option></option>
                                     @foreach($data['personas'] as $persona)
-                                        <option value="{{$persona->id}}">{{$persona->nombre}}</option>
+                                        <option value="{{$persona->id}}">{{$persona->nombre}} {{$persona->apellidos}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -61,8 +61,8 @@
                                 <select class="form-control" id="usuarios-perfil" name="perfil">
                                     <option value="administrador">Administrador</option>
                                     <option value="mostrador">Mostrador</option>
-                                    <option value="administrador">Mantenimiento</option>
-                                    <option value="administrador">Limpieza</option>
+                                    <option value="mantenimiento">Mantenimiento</option>
+{{--                                    <option value="administrador">Limpieza</option>--}}
                                 </select>
                             </div>
                         </div>

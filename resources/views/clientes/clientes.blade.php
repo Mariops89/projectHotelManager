@@ -35,7 +35,7 @@
                         <div class="col-2">
                             <div class="mb-3">
                                 <label for="cliente-dni" class="form-label">DNI</label>
-                                <input type="text" class="form-control" id="cliente-dni" name="dni">
+                                <input type="text" class="form-control text-uppercase" id="cliente-dni" name="dni">
                             </div>
                         </div>
                         <div class="col">

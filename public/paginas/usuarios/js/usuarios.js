@@ -9,7 +9,7 @@ $(function () {
     $('#usuarios-perfil').select2({
         width: '100%',
         placeholder: 'Seleccione un perfil',
-        allowClear: false //para poder deseleccionar
+        minimumResultsForSearch: Infinity,
     });
 
     $('#usuarios-id_personal').select2({
@@ -23,6 +23,7 @@ $(function () {
         id_activo = null;
         modal_usuarios.find('.modal-title').html('Nuevo usuario');
         modal_usuarios.find('input').val('');
+        $('#usuarios-id_personal').val(null).trigger('change');
         modal_usuarios_bs.show();
     });
 
@@ -36,16 +37,16 @@ $(function () {
         columns: [
             {data: 'usuario', title: 'Usuario'},
             {data: '', title: 'Contraseña', defaultContent: '******'},
-            {data: 'personal.nombre', title: 'Persona', defaultContent: 'No asignado'
-                /*render: function (data, type, row, meta) {
-                    if (data === 1) {
-                        return `<span class="badge bg-success fs-6">Empleado</span>`
-                    } else if (data === 2) {
-                        return `<span class="badge bg-danger fs-6">No empleado</span>`
+            {data: 'personal', title: 'Empleado asociado',
+                render: function (data, type, row, meta) {
+                    if (data === null) {
+                        return 'No asignado';
+                    } else {
+                        return data.nombre + ' ' + data.apellidos
                     }
-                }*/},
-            {data: 'perfil', title: 'Perfil'},
-
+                }
+            },
+            {data: 'perfil', title: 'Perfil', className: 'text-capitalize'},
             {data: 'id', orderable: false, className: 'text-nowrap', width: '5px', render: function (data, type, row, meta) {
                     return `
                     <button class="btn btn btn-outline-secondary btn-xs editar">

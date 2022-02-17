@@ -90,7 +90,7 @@ $(function () {
         let datos = table.row(tr).data();
         id_activo = datos.id;
         modal_eliminar.find('.modal-title-text').html('Eliminar habitación');
-        modal_eliminar.find('.mensaje').html(`¿Está seguro de que quiere eliminar la habtiación <i class="text-nowrap">${datos.numero}</i>?`);
+        modal_eliminar.find('.mensaje').html(`¿Está seguro de que quiere eliminar la habitación <i class="text-nowrap">${datos.numero}</i>?`);
         modal_eliminar_bs.show();
     });
 
@@ -112,23 +112,22 @@ $(function () {
         }).fail(function (error) {
             mostrarErrores(error, modal_habitaciones);
         });
+    });
 
 
-        modal_eliminar.on('click', '.eliminar', function () {
-            //enviar los datos al servidor mediante POST (usando AJAX)
-            let datos_envio = {
-                id: id_activo
-            };
-            $.post(BASE_URL + 'habitaciones/eliminar', datos_envio, function () {
-                //se ejecuta cuando recibe respuesta válida
+    modal_eliminar.on('click', '.eliminar', function () {
+        //enviar los datos al servidor mediante POST (usando AJAX)
+        let datos_envio = {
+            id: id_activo
+        };
+        $.post(BASE_URL + 'habitaciones/eliminar', datos_envio, function () {
+            //se ejecuta cuando recibe respuesta válida
 
-                //recargar el datatables
-                table.ajax.reload();
-                //ocultar el modal
-                modal_eliminar_bs.hide();
-            })
-        });
-
+            //recargar el datatables
+            table.ajax.reload();
+            //ocultar el modal
+            modal_eliminar_bs.hide();
+        })
     });
 });
 

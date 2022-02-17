@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-2">
                             <div class="mb-3">
-                                <label for="incidencia-habitacion" class="form-label">Habitacion</label>
+                                <label for="incidencia-habitacion" class="form-label">Habitación</label>
                                 <select class="form-control" id="incidencia-habitacion" name="id_habitacion">
                                     @foreach($data['habitaciones'] as $habitacion)
                                         <option value="{{$habitacion->id}}">{{$habitacion->numero}}</option>

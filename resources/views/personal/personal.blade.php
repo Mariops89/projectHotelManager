@@ -35,7 +35,7 @@
                         <div class="col-2">
                             <div class="mb-3">
                                 <label for="empleado-dni" class="form-label">DNI</label>
-                                <input type="text" class="form-control" id="empleado-dni" name="dni">
+                                <input type="text" class="form-control text-uppercase" id="empleado-dni" name="dni">
                             </div>
                         </div>
                         <div class="col">
@@ -96,7 +96,7 @@
                                 <select class="form-control" id="empleado-tipo" name="tipo">
                                     <option value="recepcionista">Recepcionista</option>
                                     <option value="mantenimiento">Mantenimiento</option>
-                                    <option value="limpieza">Limpieza</option>
+{{--                                    <option value="limpieza">Limpieza</option>--}}
                                 </select>
                             </div>
                         </div>

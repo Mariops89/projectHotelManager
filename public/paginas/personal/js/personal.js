@@ -35,9 +35,8 @@ $(function () {
             {data: 'localidad', title: 'Localidad'},
             {data: 'cod_postal', title: 'Código postal'},
             {data: 'provincia', title: 'Provincia'},
-            {data: 'pais', title: 'Pais'},
-            {data: 'tipo', title: 'Tipo'
-            },
+            {data: 'pais', title: 'País'},
+            {data: 'tipo', title: 'Tipo', className: 'text-capitalize'},
             {data: 'id', orderable: false, className: 'text-nowrap', width: '5px', render: function (data, type, row, meta) {
                     return `
                     <button class="btn btn btn-outline-secondary btn-xs editar">
@@ -71,7 +70,7 @@ $(function () {
         $('#empleado-cod-postal').val(datos.cod_postal);
         $('#empleado-provincia').val(datos.provincia);
         $('#empleado-pais').val(datos.pais);
-        $('#empleado-tipo').val(datos.tipo);
+        $('#empleado-tipo').val(datos.tipo).trigger('change');
         modal_personal_bs.show();
 
     }).on('click', '.eliminar', function () {
