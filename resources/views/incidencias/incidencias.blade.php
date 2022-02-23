@@ -73,6 +73,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label>Acciones</label>
+                                <p id="incidencia-acciones"></p>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer justify-content-between">

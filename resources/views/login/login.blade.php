@@ -17,7 +17,7 @@
                                         <i class="mdi mdi-account fs-4"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control form-control-lg" placeholder="Escriba su nombre de usuario" name="usuario">
+                                <input type="text" class="form-control form-control-lg" placeholder="Escriba su nombre de usuario" name="usuario" autofocus>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">

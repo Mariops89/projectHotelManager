@@ -35,6 +35,7 @@ $(function () {
         modal_incidencias.find('.modal-title').html('Nueva incidencia');
         modal_incidencias.find('input').val('');
         modal_incidencias.find('textarea').val('');
+        $('#incidencia-acciones').html('');
         modal_incidencias_bs.show();
     });
 
@@ -117,7 +118,7 @@ $(function () {
         // $('#incidencia-fecha_notificacion').val(datos.fecha_notificacion);
         // $('#incidencia-fecha_resolucion').val(datos.fecha_resolucion);
         $('#incidencia-detalles').val(datos.detalles);
-        //$('#incidencia-acciones').val(datos.acciones);
+        $('#incidencia-acciones').html(datos.acciones);
 
         modal_incidencias_bs.show();
 
