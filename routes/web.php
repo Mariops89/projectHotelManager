@@ -45,7 +45,6 @@ Route::middleware('acceso:mostrador')->group(function () {
     Route::post('/reservas/buscar-cliente', [ReservaController::class, 'buscarClienteAJAX']);
     Route::post('/reservas/confirmar', [ReservaController::class, 'confirmarReservaAJAX']);
     Route::post('/reservas/eliminar', [ReservasController::class, 'eliminar']);
-    Route::post('/reservas/guardar', [ReservasController::class, 'guardar']);
     Route::post('/reservas/guardarcheckin', [ReservasController::class, 'guardarCheckin']);
     Route::post('/reservas/guardarcheckout', [ReservasController::class, 'guardarCheckout']);
 

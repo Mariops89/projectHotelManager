@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GuardarIncidenciaRequest;
 use App\Models\Factura;
 use App\Models\Habitacion;
 use App\Models\Reserva;
@@ -46,22 +45,6 @@ class ReservasController
             });
     }
 
-
-    public function guardar(GuardarIncidenciaRequest $request)
-    {
-        if (is_null($request->id)) {
-            //crear
-           // $array = $request->validated();
-           // $array ['fecha_notificacion'] = Carbon::now();
-            Reserva::create($request->validated());
-        } else {
-            //editar
-            Reserva::find($request->id)->update($request->validated());
-            dd($_POST);
-        }
-
-    }
-
     public function guardarCheckin (Request $request)
     {
 
@@ -82,6 +65,14 @@ class ReservasController
 
     public function eliminar(Request $request)
     {
-        Reserva::destroy($request->id);
+        $reserva = Reserva::find($request->id);
+        if (is_null($reserva->factura)) {
+            $reserva->delete();
+            $borrado = true;
+        } else {
+            $borrado = false;
+        }
+
+        return ['borrado' => $borrado];
     }
 }

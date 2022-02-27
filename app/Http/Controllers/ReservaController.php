@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BuscarHabitacionesLibresRequest;
 use App\Models\Cliente;
-use App\Models\Habitacion;
 use App\Models\Reserva;
 use App\Models\TipoHabitacion;
 use App\Services\PlantillaService;

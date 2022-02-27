@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\GuardarFacturaRequest;
-use App\Http\Requests\GuardarIncidenciaRequest;
 use App\Models\Factura;
-use App\Models\Habitacion;
 use App\Models\Reserva;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;

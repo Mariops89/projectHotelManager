@@ -82,6 +82,7 @@
         <div class="container-fluid">
             @include($vista)
             @include('plantilla/modal-eliminar')
+            @include('plantilla/modal-error')
         </div>
         <!-- ============================================================== -->
         <!-- End Container fluid  -->

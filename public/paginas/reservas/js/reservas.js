@@ -6,6 +6,8 @@ $(function () {
     const modal_factura_bs = new bootstrap.Modal(modal_factura[0], {backdrop: 'static'});
     const modal_eliminar = $('#modal-eliminar');
     const modal_eliminar_bs = new bootstrap.Modal(modal_eliminar[0], {backdrop: 'static'});
+    const modal_error = $('#modal-error');
+    const modal_error_bs = new bootstrap.Modal(modal_error[0], {backdrop: 'static'});
     let id_activo = null;
     let id_factura_activo = null;
 
@@ -232,14 +234,20 @@ $(function () {
         let datos_envio = {
             id: id_activo
         };
-        $.post(BASE_URL + 'reservas/eliminar', datos_envio, function () {
-            //se ejecuta cuando recibe respuesta válida
+        $.post(BASE_URL + 'reservas/eliminar', datos_envio, function (respuesta) {
+            if (respuesta.borrado) {
+                //se ejecuta cuando recibe respuesta válida
 
-            //recargar el datatables
-            table.ajax.reload();
-            //ocultar el modal
-            modal_eliminar_bs.hide();
-        })
+                //recargar el datatables
+                table.ajax.reload();
+                //ocultar el modal
+                modal_eliminar_bs.hide();
+            } else {
+                modal_eliminar_bs.hide();
+                modal_error.find('.mensaje').html(`No se puede eliminar una reserva que ya ha sido facturada`);
+                modal_error_bs.show();
+            }
+        }, 'json')
     });
 
 

@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AtederIncidenciaRequest;
-use App\Http\Requests\GuardarClienteRequest;
-use App\Http\Requests\GuardarIncidenciaRequest;
-use App\Models\Habitacion;
 use App\Models\Incidencia;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
