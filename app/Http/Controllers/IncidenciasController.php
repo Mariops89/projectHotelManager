@@ -14,7 +14,7 @@ class IncidenciasController extends Controller
 
     public function listar(PlantillaService $plantilla)
     {
-        $habitaciones = Habitacion::all();
+        $habitaciones = Habitacion::orderBy('numero')->get();
 
         $plantilla->setTitle('Incidencias');
         $plantilla->setIcon('fas fa-exclamation-triangle');
