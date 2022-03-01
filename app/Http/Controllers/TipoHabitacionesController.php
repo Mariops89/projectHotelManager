@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GuardarTipoHabitacionRequest;
+use App\Models\Habitacion;
 use App\Models\TipoHabitacion;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
@@ -40,6 +41,13 @@ class TipoHabitacionesController extends Controller
 
     public function eliminar(Request $request)
     {
-        TipoHabitacion::destroy($request->id);
+        if (Habitacion::where('id_tipo_habitacion', $request->id)->doesntExist()) {
+            TipoHabitacion::destroy($request->id);
+            $borrado = true;
+        } else {
+            $borrado = false;
+        }
+
+        return ['borrado' => $borrado];
     }
 }

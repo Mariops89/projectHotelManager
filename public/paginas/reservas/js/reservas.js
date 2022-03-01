@@ -235,8 +235,8 @@ $(function () {
             id: id_activo
         };
         $.post(BASE_URL + 'reservas/eliminar', datos_envio, function (respuesta) {
+            //se ejecuta cuando recibe respuesta válida
             if (respuesta.borrado) {
-                //se ejecuta cuando recibe respuesta válida
 
                 //recargar el datatables
                 table.ajax.reload();

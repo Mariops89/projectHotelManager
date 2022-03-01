@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GuardarPersonalRequest;
+use App\Models\Incidencia;
 use App\Models\Personal;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
@@ -42,7 +43,14 @@ class PersonalController extends Controller
 
     public function eliminar(Request $request)
     {
-        Personal::destroy($request->id);
+        if (Incidencia::where('id_personal', $request->id)->doesntExist()) {
+            Personal::destroy($request->id);
+            $borrado = true;
+        } else {
+            $borrado = false;
+        }
+
+        return ['borrado' => $borrado];
     }
 }
 

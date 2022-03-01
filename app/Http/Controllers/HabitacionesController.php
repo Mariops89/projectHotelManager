@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GuardarHabitacionRequest;
 use App\Models\Habitacion;
+use App\Models\Incidencia;
+use App\Models\Reserva;
 use App\Models\TipoHabitacion;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
@@ -44,6 +46,16 @@ class HabitacionesController extends Controller
 
     public function eliminar(Request $request)
     {
-        Habitacion::destroy($request->id);
+        if (
+            Reserva::where('id_habitacion', $request->id)->doesntExist()
+            && Incidencia::where('id_habitacion', $request->id)->doesntExist()
+        ) {
+            Habitacion::destroy($request->id);
+            $borrado = true;
+        } else {
+            $borrado = false;
+        }
+
+        return ['borrado' => $borrado];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GuardarClienteRequest;
 use App\Models\Cliente;
+use App\Models\Reserva;
 use App\Services\PlantillaService;
 use Illuminate\Http\Request;
 
@@ -42,6 +43,13 @@ class ClientesController extends Controller
 
     public function eliminar(Request $request)
     {
-        Cliente::destroy($request->id);
+        if (Reserva::where('id_cliente', $request->id)->doesntExist()) {
+            Cliente::destroy($request->id);
+            $borrado = true;
+        } else {
+            $borrado = false;
+        }
+
+        return ['borrado' => $borrado];
     }
 }

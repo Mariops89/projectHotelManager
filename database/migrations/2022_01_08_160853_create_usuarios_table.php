@@ -17,7 +17,8 @@ class CreateUsuariosTable extends Migration
             $table->id();
             $table->string('usuario', 50)->unique();
             $table->string('password', 100);
-            $table->foreignId('id_personal')->nullable()->constrained('personal');
+            $table->foreignId('id_personal')->nullable()->constrained('personal')->cascadeOnDelete();
+            $table->enum('perfil' , ['administrador' , 'mostrador', 'mantenimiento' , 'limpieza']);
             $table->timestamps();
         });
     }

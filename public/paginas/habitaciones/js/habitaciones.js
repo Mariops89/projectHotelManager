@@ -4,6 +4,8 @@ $(function () {
     const modal_habitaciones_bs = new bootstrap.Modal(modal_habitaciones[0], {backdrop: 'static'});
     const modal_eliminar = $('#modal-eliminar');
     const modal_eliminar_bs = new bootstrap.Modal(modal_eliminar[0], {backdrop: 'static'});
+    const modal_error = $('#modal-error');
+    const modal_error_bs = new bootstrap.Modal(modal_error[0], {backdrop: 'static'});
     let id_activo = null;
 
 
@@ -120,14 +122,19 @@ $(function () {
         let datos_envio = {
             id: id_activo
         };
-        $.post(BASE_URL + 'habitaciones/eliminar', datos_envio, function () {
-            //se ejecuta cuando recibe respuesta válida
+        $.post(BASE_URL + 'habitaciones/eliminar', datos_envio, function (respuesta) {
+            if (respuesta.borrado) {
 
-            //recargar el datatables
-            table.ajax.reload();
-            //ocultar el modal
-            modal_eliminar_bs.hide();
-        })
+                //recargar el datatables
+                table.ajax.reload();
+                //ocultar el modal
+                modal_eliminar_bs.hide();
+            } else {
+                modal_eliminar_bs.hide();
+                modal_error.find('.mensaje').html(`No se puede eliminar una habitación que haya sido usada.`);
+                modal_error_bs.show();
+            }
+        }, 'json')
     });
 });
 
