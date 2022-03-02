@@ -24,8 +24,9 @@ $(function () {
         },
         columns: [
             {data: 'tipo', title: 'Tipo'},
-            {data: 'precio_alta', title: 'Precio en temporada alta'},
-            {data: 'precio_baja', title: 'Precio en temporada baja'},
+            {data: 'precio_alta', title: 'Precio en temporada alta', render: euros},
+            {
+                data: 'precio_baja', title: 'Precio en temporada baja', render: euros} ,
             {
                 data: 'id',
                 orderable: false,

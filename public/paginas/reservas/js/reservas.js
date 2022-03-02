@@ -48,7 +48,7 @@ $(function () {
             {data: 'fecha_entrada', title: 'Fecha de entrada', render: renderDate},
             {data: 'fecha_salida', title: 'Fecha de salida', render: renderDate},
             {data: 'personas', title: 'Número de personas'},
-            {data: 'precio', title: 'Precio'},
+            {data: 'precio', title: 'Precio', render:euros, "autoWidth": true},
             {
                 data: 'late_checkout', title: 'Late checkout',
 

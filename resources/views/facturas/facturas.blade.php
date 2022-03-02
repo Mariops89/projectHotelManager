@@ -12,7 +12,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <table class="table table-striped table-bordered w-100" id="tabla-facturas"></table>
+                        <table class="table table-striped table-bordered w-100 text-nowrap" id="tabla-facturas"></table>
                     </div>
                 </div>
             </div>

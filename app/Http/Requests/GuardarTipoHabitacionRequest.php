@@ -16,6 +16,14 @@ class GuardarTipoHabitacionRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'precio_alta' => round($this->precio_alta, 2),
+            'precio_baja' => round($this->precio_baja, 2),
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *

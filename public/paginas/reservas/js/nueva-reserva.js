@@ -42,7 +42,7 @@ $(function () {
             {data: 'numero', title: 'Habitación'},
             {data: 'tipo.tipo', title: 'Tipo de habitación'},
             {data: 'personas', title: 'Número de personas'},
-            {data: 'precio_estancia', title: 'Precio estancia'},
+            {data: 'precio_estancia', title: 'Precio estancia', render: euros},
             {
                 data: 'id',
                 orderable: false,

@@ -56,7 +56,7 @@ function renderDatetime(data, type, row, meta) {
 
 
 function render2Decimales(data, type, row, meta) {
-    return parseFloat(data).toFixed(2);
+    return thousandSeparator(parseFloat(data).toFixed(2));
 }
 
 function  dateFormat(date){
@@ -71,4 +71,15 @@ function  dateTimeFormat(date) {
         date = moment(date).format('DD/MM/YYYY HH:mm:ss');
     }
     return date;
+}
+
+function thousandSeparator(number) {
+    let array_number = number.toString().split('.');
+    array_number[0] = array_number[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+
+    return array_number.join(',');
+}
+
+function euros (data, type, row, meta) {
+    return render2Decimales(data, type, row, meta) + ' €';
 }

@@ -38,8 +38,8 @@ $(function () {
             {data: 'numero', title: 'Número'},
             {data: 'tipo.tipo', title: 'Tipo de habitación'},
             {data: 'personas', title: 'Número de personas'},
-            {data: 'tipo.precio_baja', title: 'Precio en temporada baja'},
-            {data: 'tipo.precio_alta', title: 'Precio en temporada alta'},
+            {data: 'tipo.precio_baja', title: 'Precio en temporada baja', render:euros},
+            {data: 'tipo.precio_alta', title: 'Precio en temporada alta', render:euros},
             {
                 data: 'estado', title: 'Estado', className: 'text-center',
                 render: function (data, type, row, meta) {

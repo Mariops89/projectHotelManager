@@ -46,9 +46,9 @@ $(function () {
                 }
             },
             {data: 'fecha', title: 'Fecha factura', render: renderDate},
-            {data: 'subtotal', title: 'Subtotal', render: render2Decimales},
-            {data: 'iva', title: 'IVA', render: render2Decimales},
-            {data: 'total', title: 'Total', render: render2Decimales},
+            {data: 'subtotal', title: 'Subtotal', render: euros},
+            {data: 'iva', title: 'IVA', render: euros},
+            {data: 'total', title: 'Total', render: euros},
             {data: 'forma_pago', title: 'Forma de pago'},
             {data: 'timestamp_pago', title: 'Fecha de pago',
                 render: function (data, type, row, meta) {
@@ -113,16 +113,16 @@ $(function () {
             lineas += `<tr>
                     <td>${linea.concepto}</td>
                     <td>${linea.cantidad}</td>
-                    <td>${parseFloat(linea.precio).toFixed(2)}</td>
-                    <td>${parseFloat(linea.base_imponible).toFixed(2)}</td>
-                    <td>${parseFloat(linea.iva).toFixed(2)}</td>
-                    <td>${parseFloat(linea.subtotal).toFixed(2)}</td>
+                    <td>${parseFloat(linea.precio).toFixed(2)} €</td>
+                    <td>${parseFloat(linea.base_imponible).toFixed(2)} €</td>
+                    <td>${parseFloat(linea.iva).toFixed(2)} €</td>
+                    <td>${parseFloat(linea.subtotal).toFixed(2)} €</td>
                 </tr>`;
         });
         $('#tabla-lineas tbody').html(lineas);
-        $('#tabla-lineas .subtotal').html(parseFloat(datos.subtotal).toFixed(2));
-        $('#tabla-lineas .iva').html(parseFloat(datos.iva).toFixed(2));
-        $('#tabla-lineas .total').html(parseFloat(datos.total).toFixed(2));
+        $('#tabla-lineas .subtotal').html(parseFloat(datos.subtotal).toFixed(2) + ' €');
+        $('#tabla-lineas .iva').html(parseFloat(datos.iva).toFixed(2) + ' €');
+        $('#tabla-lineas .total').html(parseFloat(datos.total).toFixed(2) + ' €');
 
 
         modal_factura_bs.show();

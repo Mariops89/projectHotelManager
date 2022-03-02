@@ -17,7 +17,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <table class="table table-striped table-bordered w-100" id="tabla-reservas"></table>
+                        <table class="table table-striped table-bordered w-100 text-nowrap" id="tabla-reservas"></table>
                     </div>
                 </div>
             </div>
