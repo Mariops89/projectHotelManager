@@ -7,7 +7,7 @@ use App\Http\Controllers\HabitacionesController;
 use App\Http\Controllers\IncidenciasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MantenimientoController;
-use App\Http\Controllers\personalController;
+use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\ServiciosController;
